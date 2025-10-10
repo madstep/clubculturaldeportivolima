@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Propuesta para el Club Deportivo Cultural Lima</title>
+    <title>Mi Propuesta para el Club Cultural Deportivo Lima</title>
     <style>
         * {
             margin: 0;
@@ -19,7 +19,7 @@
         }
 
         .hero {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #0D4F8B 0%, #1a6bb8 100%);
             color: white;
             padding: 4rem 2rem;
             text-align: center;
@@ -55,6 +55,12 @@
             animation: fadeInDown 1s ease;
         }
 
+        .club-logo img {
+            width: 180px;
+            height: auto;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+        }
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -80,7 +86,7 @@
         }
 
         .cta-button {
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            background: linear-gradient(45deg, #C41E3A, #e02e4a);
             color: white;
             padding: 1rem 2rem;
             border: none;
@@ -91,12 +97,13 @@
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(255, 107, 53, 0.4);
+            box-shadow: 0 6px 25px rgba(196, 30, 58, 0.5);
+            background: linear-gradient(45deg, #e02e4a, #C41E3A);
         }
 
         .container {
@@ -114,7 +121,7 @@
             text-align: center;
             margin-bottom: 3rem;
             font-size: 2.5rem;
-            color: #1e3c72;
+            color: #0D4F8B;
             position: relative;
         }
 
@@ -122,7 +129,7 @@
             content: '';
             width: 100px;
             height: 4px;
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            background: linear-gradient(45deg, #C41E3A, #0D4F8B);
             position: absolute;
             bottom: -10px;
             left: 50%;
@@ -134,19 +141,21 @@
             background: white;
             margin: 2rem 0;
             border-radius: 15px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 30px rgba(13, 79, 139, 0.1);
             transition: all 0.3s ease;
             overflow: hidden;
             cursor: pointer;
+            border: 2px solid transparent;
         }
 
         .phase-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 50px rgba(13, 79, 139, 0.2);
+            border-color: #0D4F8B;
         }
 
         .phase-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0D4F8B 0%, #1a6bb8 100%);
             color: white;
             padding: 1.5rem 2rem;
             display: flex;
@@ -164,6 +173,7 @@
             justify-content: center;
             font-weight: bold;
             font-size: 1.2rem;
+            border: 2px solid white;
         }
 
         .phase-title {
@@ -177,7 +187,7 @@
         }
 
         .phase-duration {
-            background: rgba(255,255,255,0.2);
+            background: rgba(196, 30, 58, 0.9);
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -199,15 +209,19 @@
 
         .phase-content li {
             padding: 0.75rem 0;
-            border-left: 4px solid #ff6b35;
+            border-left: 4px solid #C41E3A;
             padding-left: 1rem;
             margin: 0.5rem 0;
-            background: linear-gradient(90deg, rgba(255,107,53,0.05) 0%, transparent 100%);
+            background: linear-gradient(90deg, rgba(196, 30, 58, 0.05) 0%, transparent 100%);
+        }
+
+        .phase-content strong {
+            color: #0D4F8B;
         }
 
         .benefits-section {
             padding: 4rem 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0D4F8B 0%, #1a6bb8 100%);
             color: white;
         }
 
@@ -223,30 +237,52 @@
             padding: 2rem;
             border-radius: 15px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.2);
             transition: all 0.3s ease;
         }
 
         .benefit-card:hover {
             transform: translateY(-5px);
             background: rgba(255,255,255,0.15);
+            border-color: rgba(196, 30, 58, 0.8);
         }
 
         .benefit-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            background: linear-gradient(45deg, #C41E3A, #e02e4a);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1rem;
             font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.4);
         }
 
         .transparency-section {
             padding: 4rem 0;
             background: white;
+        }
+
+        .transparency-section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #0D4F8B;
+            position: relative;
+        }
+
+        .transparency-section h2::after {
+            content: '';
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #C41E3A, #0D4F8B);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
 
         .commitment-grid {
@@ -262,17 +298,19 @@
             border-radius: 15px;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
 
         .commitment-card:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(13, 79, 139, 0.2);
+            border-color: #0D4F8B;
         }
 
         .commitment-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            background: linear-gradient(135deg, #0D4F8B, #1a6bb8);
             color: white;
             border-radius: 50%;
             display: flex;
@@ -280,10 +318,16 @@
             justify-content: center;
             margin: 0 auto 1rem;
             font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(13, 79, 139, 0.3);
+        }
+
+        .commitment-card h3 {
+            color: #0D4F8B;
+            margin-bottom: 1rem;
         }
 
         .footer {
-            background: #1e3c72;
+            background: linear-gradient(135deg, #0D4F8B 0%, #1a6bb8 100%);
             color: white;
             padding: 3rem 0;
             text-align: center;
@@ -296,8 +340,14 @@
             margin: 2rem 0;
         }
 
+        .contact-info h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
         .expand-icon {
             transition: transform 0.3s ease;
+            color: white;
         }
 
         .expand-icon.rotated {
@@ -330,9 +380,15 @@
             left: 0;
             width: 0%;
             height: 4px;
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            background: linear-gradient(90deg, #C41E3A, #0D4F8B);
             z-index: 1000;
             transition: width 0.3s ease;
+        }
+
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, #C41E3A 0%, #0D4F8B 50%, #C41E3A 100%);
+            margin: 0;
         }
     </style>
 </head>
@@ -342,13 +398,46 @@
     <section class="hero">
         <div class="hero-content">
             <div class="club-logo">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAABkCAYAAABwx8J9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AUkSYqIQkQSogMABBAAYFRSAIBRQhCAhERQMABEAAICQYRCgADAwMDAwIBAwQEBAQEAwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC" alt="Logo CCDL" style="width: 180px; height: auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" width="180" height="135">
+                    <!-- Escudo exterior -->
+                    <path d="M100 10 L160 30 L160 90 Q160 120 100 140 Q40 120 40 90 L40 30 Z" 
+                          fill="white" stroke="#0D4F8B" stroke-width="5"/>
+                    
+                    <!-- Escudo interior -->
+                    <path d="M100 20 L150 35 L150 85 Q150 110 100 125 Q50 110 50 85 L50 35 Z" 
+                          fill="white" stroke="#0D4F8B" stroke-width="3"/>
+                    
+                    <!-- Líneas cruzadas (primera línea diagonal) -->
+                    <line x1="70" y1="50" x2="130" y2="100" stroke="#C41E3A" stroke-width="4"/>
+                    
+                    <!-- Líneas cruzadas (segunda línea diagonal) -->
+                    <line x1="130" y1="50" x2="70" y2="100" stroke="#C41E3A" stroke-width="4"/>
+                    
+                    <!-- Letra C (superior izquierda) -->
+                    <text x="65" y="60" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#0D4F8B">C</text>
+                    
+                    <!-- Letra C (inferior izquierda) -->
+                    <text x="65" y="100" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#0D4F8B">C</text>
+                    
+                    <!-- Letra D (superior derecha) -->
+                    <text x="116" y="60" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#0D4F8B">D</text>
+                    
+                    <!-- Letra L (inferior central) -->
+                    <text x="93" y="90" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#0D4F8B">L</text>
+                    
+                    <!-- Año 1966 -->
+                    <text x="83" y="118" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#0D4F8B">1966</text>
+                </svg>
             </div>
-            <h1>Una Nueva Era para Nuestro Club</h1>
+            <h1>Unidos por el Cambio</h1>
+            <h2 style="font-size: 2rem; margin-bottom: 1rem; font-weight: 600;">Juan Jara "Frejol"</h2>
+            <p style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">2025 - 2027</p>
             <p>Club Cultural Deportivo Lima merece una dirección visionaria, transparente y comprometida con el bienestar de todos sus socios.</p>
             <a href="#propuesta" class="cta-button">Conoce Mi Propuesta</a>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <section id="propuesta" class="timeline">
         <div class="container">
@@ -465,6 +554,8 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <section class="benefits-section">
         <div class="container">
             <h2>🎯 Beneficios para Nuestros Socios</h2>
@@ -487,6 +578,8 @@
             </div>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <section class="transparency-section">
         <div class="container">
@@ -518,23 +611,81 @@
 
     <footer class="footer">
         <div class="container">
-            <h3>🤝 Juntos Construiremos el Futuro</h3>
+            <h3>🤝 Juntos Construiremos el Futuro de Nuestro Club</h3>
             <p>Mi compromiso es trabajar con transparencia, eficiencia y dedicación para hacer realidad esta visión de progreso para nuestro querido Club Cultural Deportivo Lima.</p>
             <div class="contact-info">
                 <div>
-                    <h4>📧 Contacto</h4>
-                    <p>Para consultas y sugerencias</p>
+                    <h4>📱 Juan Jara "Frejol" te escucha</h4>
+                    <p>Escanea el código QR para unirte a nuestro grupo de WhatsApp</p>
+                    <div style="background: white; padding: 1.5rem; border-radius: 15px; display: inline-block; margin-top: 1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 29 29">
+                            <!-- Código QR simplificado - Reemplazar con URL real de WhatsApp -->
+                            <rect width="29" height="29" fill="white"/>
+                            <g fill="black">
+                                <!-- Esquina superior izquierda -->
+                                <rect x="0" y="0" width="7" height="7"/>
+                                <rect x="1" y="1" width="5" height="5" fill="white"/>
+                                <rect x="2" y="2" width="3" height="3"/>
+                                
+                                <!-- Esquina superior derecha -->
+                                <rect x="22" y="0" width="7" height="7"/>
+                                <rect x="23" y="1" width="5" height="5" fill="white"/>
+                                <rect x="24" y="2" width="3" height="3"/>
+                                
+                                <!-- Esquina inferior izquierda -->
+                                <rect x="0" y="22" width="7" height="7"/>
+                                <rect x="1" y="23" width="5" height="5" fill="white"/>
+                                <rect x="2" y="24" width="3" height="3"/>
+                                
+                                <!-- Patrón central (decorativo - no funcional) -->
+                                <rect x="9" y="9" width="1" height="1"/>
+                                <rect x="11" y="9" width="1" height="1"/>
+                                <rect x="13" y="9" width="1" height="1"/>
+                                <rect x="15" y="9" width="1" height="1"/>
+                                <rect x="17" y="9" width="1" height="1"/>
+                                <rect x="19" y="9" width="1" height="1"/>
+                                
+                                <rect x="9" y="11" width="1" height="1"/>
+                                <rect x="13" y="11" width="1" height="1"/>
+                                <rect x="15" y="11" width="1" height="1"/>
+                                <rect x="19" y="11" width="1" height="1"/>
+                                
+                                <rect x="9" y="13" width="1" height="1"/>
+                                <rect x="11" y="13" width="1" height="1"/>
+                                <rect x="13" y="13" width="3" height="3"/>
+                                <rect x="17" y="13" width="1" height="1"/>
+                                <rect x="19" y="13" width="1" height="1"/>
+                                
+                                <rect x="9" y="15" width="1" height="1"/>
+                                <rect x="17" y="15" width="1" height="1"/>
+                                <rect x="19" y="15" width="1" height="1"/>
+                                
+                                <rect x="9" y="17" width="1" height="1"/>
+                                <rect x="11" y="17" width="1" height="1"/>
+                                <rect x="13" y="17" width="1" height="1"/>
+                                <rect x="15" y="17" width="1" height="1"/>
+                                <rect x="17" y="17" width="1" height="1"/>
+                                <rect x="19" y="17" width="1" height="1"/>
+                                
+                                <rect x="9" y="19" width="1" height="1"/>
+                                <rect x="13" y="19" width="1" height="1"/>
+                                <rect x="15" y="19" width="1" height="1"/>
+                                <rect x="19" y="19" width="1" height="1"/>
+                            </g>
+                        </svg>
+                        <p style="color: #0D4F8B; font-weight: bold; margin-top: 0.5rem;">Únete al grupo</p>
+                    </div>
                 </div>
                 <div>
                     <h4>🗓️ Cronograma</h4>
-                    <p>Implementación por fases</p>
+                    <p>Implementación por fases con transparencia total</p>
                 </div>
                 <div>
                     <h4>💡 Propuestas</h4>
-                    <p>Siempre abierto a nuevas ideas</p>
+                    <p>Siempre abierto a nuevas ideas de nuestros socios</p>
                 </div>
             </div>
-            <p style="margin-top: 2rem; opacity: 0.8;">© 2025 - Propuesta Electoral Club Cultural Deportivo Lima</p>
+            <p style="margin-top: 2rem; opacity: 0.8;">© 2025 - Juan Jara "Frejol" - Unidos por el Cambio - Club Cultural Deportivo Lima</p>
         </div>
     </footer>
 
