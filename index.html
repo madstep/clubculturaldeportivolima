@@ -540,6 +540,38 @@
         max-width: 95%;
     }
 }
+
+/* Contenedor general */
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Imagen con sombra y transición */
+.team-list-image {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+    border: 3px solid #fff;
+}
+
+/* Efecto hover */
+.team-list-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(196, 30, 58, 0.4);
+}
+
+/* Ajustes responsive */
+@media (max-width: 600px) {
+    .team-list-image {
+        max-width: 90%;
+    }
+}
     </style>
 </head>
 <body>
@@ -934,7 +966,7 @@
                 role: "Consejo Directivo 2025 - 2027",
                 description: "Un equipo sólido de 17 profesionales comprometidos con la transformación del Club Cultural Deportivo Lima. Cada miembro aporta experiencia, dedicación y pasión para trabajar juntos en beneficio de todos los socios, garantizando transparencia, modernización e inclusión en cada decisión.",
                 icon: "🤝",
-                photo: ""
+                photo: "Lista_1.jpg"
             }
         ];
 
