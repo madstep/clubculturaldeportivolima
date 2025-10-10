@@ -522,6 +522,24 @@
     animation: pulse 2s infinite;
     transform-origin: center;
   }
+
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 600px) {
+    #modalImage {
+        max-width: 95%;
+    }
+}
     </style>
 </head>
 <body>
@@ -749,12 +767,38 @@
     </section>
 
     <!-- Modal para imagen ampliada -->
-    <div id="imageModal" class="modal" onclick="closeModal()">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <div class="modal-content">
-            <img src="Lista_1.jpg" alt="Lista 1  - Consejo Directivo 2025-2027">
-        </div>
-    </div>
+    <div id="imageModal" style="
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0; top: 0; 
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8); 
+    justify-content: center; 
+    align-items: center;
+    padding: 1rem;
+    animation: fadeIn 0.3s ease;
+">
+    <span style="
+        position: absolute; 
+        top: 15px; 
+        right: 25px; 
+        color: #fff; 
+        font-size: 40px; 
+        font-weight: bold; 
+        cursor: pointer;
+        user-select: none;
+    " onclick="closeModal()">&times;</span>
+
+    <img id="modalImage" src="Lista_1.jpg" style="
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+        border-radius: 10px; 
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        animation: zoomIn 0.3s ease;
+    ">
+</div>
 
     <div class="section-divider"></div>
 
@@ -937,6 +981,19 @@
                 closeModal();
             }
         });
+
+        function openModal() {
+    document.getElementById("imageModal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+}
+
+// Cerrar si se hace clic fuera de la imagen
+document.getElementById("imageModal").addEventListener("click", function(e) {
+    if (e.target === this) closeModal();
+});
     </script>
 </body>
 </html>
