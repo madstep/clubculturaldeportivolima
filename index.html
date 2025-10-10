@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Propuesta integral para la modernización, transparencia y desarrollo del Club Deportivo Cultural Lima. Plan de trabajo, beneficios y compromiso con los socios.">
     <title>Mi Propuesta para el Club Deportivo Cultural Lima</title>
     <style>
         * {
@@ -49,6 +48,22 @@
             z-index: 2;
             max-width: 800px;
             margin: 0 auto;
+        }
+
+        .club-logo {
+            margin: 0 auto 2rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero h1 {
@@ -326,8 +341,11 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1>🏛️ Una Nueva Era para Nuestro Club</h1>
-            <p>Club Deportivo Cultural Lima merece una dirección visionaria, transparente y comprometida con el bienestar de todos sus socios.</p>
+            <div class="club-logo">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAABkCAYAAABwx8J9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AUkSYqIQkQSogMABBAAYFRSAIBRQhCAhERQMABEAAICQYRCgADAwMDAwIBAwQEBAQEAwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC" alt="Logo CCDL" style="width: 180px; height: auto;">
+            </div>
+            <h1>Una Nueva Era para Nuestro Club</h1>
+            <p>Club Cultural Deportivo Lima merece una dirección visionaria, transparente y comprometida con el bienestar de todos sus socios.</p>
             <a href="#propuesta" class="cta-button">Conoce Mi Propuesta</a>
         </div>
     </section>
@@ -336,7 +354,7 @@
         <div class="container">
             <h2>📋 Plan de Trabajo Integral</h2>
             
-            <div class="phase-card">
+            <div class="phase-card" onclick="togglePhase(1)">
                 <div class="phase-header">
                     <div class="phase-number">1</div>
                     <div class="phase-title">
@@ -344,7 +362,7 @@
                         <p>Poner la casa en orden</p>
                     </div>
                     <div class="phase-duration">Primeros 4-6 meses</div>
-                    <button class="expand-icon" id="icon-1" aria-expanded="false" aria-controls="content-1" onclick="togglePhase(1)" role="button">▼</button>
+                    <div class="expand-icon" id="icon-1">▼</div>
                 </div>
                 <div class="phase-content" id="content-1">
                     <ul>
@@ -357,7 +375,7 @@
                 </div>
             </div>
 
-            <div class="phase-card">
+            <div class="phase-card" onclick="togglePhase(2)">
                 <div class="phase-header">
                     <div class="phase-number">2</div>
                     <div class="phase-title">
@@ -365,7 +383,7 @@
                         <p>Elevando el nivel deportivo</p>
                     </div>
                     <div class="phase-duration">Meses 7-18</div>
-                    <button class="expand-icon" id="icon-2" aria-expanded="false" aria-controls="content-2" onclick="togglePhase(2)" role="button">▼</button>
+                    <div class="expand-icon" id="icon-2">▼</div>
                 </div>
                 <div class="phase-content" id="content-2">
                     <ul>
@@ -379,7 +397,7 @@
                 </div>
             </div>
 
-            <div class="phase-card">
+            <div class="phase-card" onclick="togglePhase(3)">
                 <div class="phase-header">
                     <div class="phase-number">3</div>
                     <div class="phase-title">
@@ -387,7 +405,7 @@
                         <p>Un club para toda la familia</p>
                     </div>
                     <div class="phase-duration">Meses 19-30</div>
-                    <button class="expand-icon" id="icon-3" aria-expanded="false" aria-controls="content-3" onclick="togglePhase(3)" role="button">▼</button>
+                    <div class="expand-icon" id="icon-3">▼</div>
                 </div>
                 <div class="phase-content" id="content-3">
                     <ul>
@@ -401,7 +419,7 @@
                 </div>
             </div>
 
-            <div class="phase-card">
+            <div class="phase-card" onclick="togglePhase(4)">
                 <div class="phase-header">
                     <div class="phase-number">4</div>
                     <div class="phase-title">
@@ -409,7 +427,7 @@
                         <p>Tecnología y sostenibilidad</p>
                     </div>
                     <div class="phase-duration">Meses 31-36</div>
-                    <button class="expand-icon" id="icon-4" aria-expanded="false" aria-controls="content-4" onclick="togglePhase(4)" role="button">▼</button>
+                    <div class="expand-icon" id="icon-4">▼</div>
                 </div>
                 <div class="phase-content" id="content-4">
                     <ul>
@@ -423,7 +441,7 @@
                 </div>
             </div>
 
-            <div class="phase-card">
+            <div class="phase-card" onclick="togglePhase(5)">
                 <div class="phase-header">
                     <div class="phase-number">5</div>
                     <div class="phase-title">
@@ -431,7 +449,7 @@
                         <p>Cultura y deporte de élite</p>
                     </div>
                     <div class="phase-duration">Desarrollo continuo</div>
-                    <button class="expand-icon" id="icon-5" aria-expanded="false" aria-controls="content-5" onclick="togglePhase(5)" role="button">▼</button>
+                    <div class="expand-icon" id="icon-5">▼</div>
                 </div>
                 <div class="phase-content" id="content-5">
                     <ul>
@@ -501,7 +519,7 @@
     <footer class="footer">
         <div class="container">
             <h3>🤝 Juntos Construiremos el Futuro</h3>
-            <p>Mi compromiso es trabajar con transparencia, eficiencia y dedicación para hacer realidad esta visión de progreso para nuestro querido Club Deportivo Cultural Lima.</p>
+            <p>Mi compromiso es trabajar con transparencia, eficiencia y dedicación para hacer realidad esta visión de progreso para nuestro querido Club Cultural Deportivo Lima.</p>
             <div class="contact-info">
                 <div>
                     <h4>📧 Contacto</h4>
@@ -516,19 +534,16 @@
                     <p>Siempre abierto a nuevas ideas</p>
                 </div>
             </div>
-            <p style="margin-top: 2rem; opacity: 0.8;">© 2025 - Propuesta Electoral Club Deportivo Cultural Lima</p>
+            <p style="margin-top: 2rem; opacity: 0.8;">© 2025 - Propuesta Electoral Club Cultural Deportivo Lima</p>
         </div>
     </footer>
 
     <script>
-        // Función para alternar la visibilidad de las fases del plan (acordeón)
         function togglePhase(phaseNumber) {
             const content = document.getElementById(`content-${phaseNumber}`);
             const icon = document.getElementById(`icon-${phaseNumber}`);
-            const expanded = content.classList.contains('active');
-            // Actualiza aria-expanded para accesibilidad
-            icon.setAttribute('aria-expanded', (!expanded).toString());
-            if (expanded) {
+            
+            if (content.classList.contains('active')) {
                 content.classList.remove('active');
                 icon.classList.remove('rotated');
             } else {
@@ -537,7 +552,6 @@
                     if (i !== phaseNumber) {
                         document.getElementById(`content-${i}`).classList.remove('active');
                         document.getElementById(`icon-${i}`).classList.remove('rotated');
-                        document.getElementById(`icon-${i}`).setAttribute('aria-expanded', 'false');
                     }
                 }
                 content.classList.add('active');
