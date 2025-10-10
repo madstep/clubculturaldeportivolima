@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Propuesta integral para la modernización, transparencia y desarrollo del Club Deportivo Cultural Lima. Plan de trabajo, beneficios y compromiso con los socios.">
+    <title>Mi Propuesta para el Club Deportivo Cultural Lima</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/><circle cx="20" cy="20" r="1" fill="white" opacity="0.1"/><circle cx="80" cy="30" r="1.5" fill="white" opacity="0.1"/></svg>');
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .timeline {
+            padding: 4rem 0;
+            background: #f8f9fa;
+        }
+
+        .timeline h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #1e3c72;
+            position: relative;
+        }
+
+        .timeline h2::after {
+            content: '';
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .phase-card {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+
+        .phase-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .phase-number {
+            background: rgba(255,255,255,0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .phase-title {
+            flex: 1;
+            margin: 0 1rem;
+        }
+
+        .phase-title h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-duration {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .phase-content {
+            padding: 2rem;
+            display: none;
+        }
+
+        .phase-content.active {
+            display: block;
+        }
+
+        .phase-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .phase-content li {
+            padding: 0.75rem 0;
+            border-left: 4px solid #ff6b35;
+            padding-left: 1rem;
+            margin: 0.5rem 0;
+            background: linear-gradient(90deg, rgba(255,107,53,0.05) 0%, transparent 100%);
+        }
+
+        .benefits-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .transparency-section {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .commitment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .commitment-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            transition: all 0.3s ease;
+        }
+
+        .commitment-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .commitment-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        .footer {
+            background: #1e3c72;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .expand-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .phase-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🏛️ Una Nueva Era para Nuestro Club</h1>
+            <p>Club Deportivo Cultural Lima merece una dirección visionaria, transparente y comprometida con el bienestar de todos sus socios.</p>
+            <a href="#propuesta" class="cta-button">Conoce Mi Propuesta</a>
+        </div>
+    </section>
+
+    <section id="propuesta" class="timeline">
+        <div class="container">
+            <h2>📋 Plan de Trabajo Integral</h2>
+            
+            <div class="phase-card">
+                <div class="phase-header">
+                    <div class="phase-number">1</div>
+                    <div class="phase-title">
+                        <h3>Saneamiento Inicial</h3>
+                        <p>Poner la casa en orden</p>
+                    </div>
+                    <div class="phase-duration">Primeros 4-6 meses</div>
+                    <button class="expand-icon" id="icon-1" aria-expanded="false" aria-controls="content-1" onclick="togglePhase(1)" role="button">▼</button>
+                </div>
+                <div class="phase-content" id="content-1">
+                    <ul>
+                        <li><strong>Auditoría completa:</strong> Financiera y legal para total transparencia</li>
+                        <li><strong>Cierre de procesos:</strong> Resolver pendientes legales</li>
+                        <li><strong>Reparaciones urgentes:</strong> Baños, duchas, piscina y seguridad</li>
+                        <li><strong>Limpieza permanente:</strong> Empresa especializada y mantenimiento preventivo</li>
+                    </ul>
+                    <p><strong>Resultado:</strong> Club operativo, seguro y con cuentas claras desde el primer semestre.</p>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <div class="phase-number">2</div>
+                    <div class="phase-title">
+                        <h3>Modernización Deportiva</h3>
+                        <p>Elevando el nivel deportivo</p>
+                    </div>
+                    <div class="phase-duration">Meses 7-18</div>
+                    <button class="expand-icon" id="icon-2" aria-expanded="false" aria-controls="content-2" onclick="togglePhase(2)" role="button">▼</button>
+                </div>
+                <div class="phase-content" id="content-2">
+                    <ul>
+                        <li><strong>Gimnasio renovado:</strong> Maquinaria moderna y entrenadores certificados</li>
+                        <li><strong>Piscina temperada:</strong> Optimización de sistemas existentes</li>
+                        <li><strong>Canchas renovadas:</strong> LED, drenaje y graderías accesibles</li>
+                        <li><strong>Nuevos espacios:</strong> Salón multiuso y coworking</li>
+                        <li><strong>Ingresos adicionales:</strong> Membresías para no socios y alianzas</li>
+                    </ul>
+                    <p><strong>Resultado:</strong> Instalaciones deportivas de primer nivel que generen ingresos propios.</p>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <div class="phase-number">3</div>
+                    <div class="phase-title">
+                        <h3>Inclusión y Servicios Sociales</h3>
+                        <p>Un club para toda la familia</p>
+                    </div>
+                    <div class="phase-duration">Meses 19-30</div>
+                    <button class="expand-icon" id="icon-3" aria-expanded="false" aria-controls="content-3" onclick="togglePhase(3)" role="button">▼</button>
+                </div>
+                <div class="phase-content" id="content-3">
+                    <ul>
+                        <li><strong>Centro para adultos mayores:</strong> Atención médica y actividades</li>
+                        <li><strong>Accesibilidad universal:</strong> Rampas, braille, vestuarios adaptados</li>
+                        <li><strong>Servicios de salud:</strong> Terapia física y campañas preventivas</li>
+                        <li><strong>Espacios familiares:</strong> Área infantil y salón de eventos</li>
+                        <li><strong>Convenios:</strong> Con aseguradoras y municipalidades</li>
+                    </ul>
+                    <p><strong>Resultado:</strong> Club inclusivo con servicios de salud y programas sociales.</p>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <div class="phase-number">4</div>
+                    <div class="phase-title">
+                        <h3>Modernización y Expansión</h3>
+                        <p>Tecnología y sostenibilidad</p>
+                    </div>
+                    <div class="phase-duration">Meses 31-36</div>
+                    <button class="expand-icon" id="icon-4" aria-expanded="false" aria-controls="content-4" onclick="togglePhase(4)" role="button">▼</button>
+                </div>
+                <div class="phase-content" id="content-4">
+                    <ul>
+                        <li><strong>Tecnología:</strong> Acceso biométrico y cajeros automáticos</li>
+                        <li><strong>Nuevos ingresos:</strong> Coworking, bar exclusivo, biohuertos</li>
+                        <li><strong>Zona de mascotas:</strong> Espacios mejorados para recreación</li>
+                        <li><strong>Energía renovable:</strong> Paneles solares y bombas eficientes</li>
+                        <li><strong>Autosostenibilidad:</strong> Reducción de costos energéticos</li>
+                    </ul>
+                    <p><strong>Resultado:</strong> Club moderno, tecnológico y ambientalmente responsable.</p>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <div class="phase-number">5</div>
+                    <div class="phase-title">
+                        <h3>Proyectos de Largo Plazo</h3>
+                        <p>Cultura y deporte de élite</p>
+                    </div>
+                    <div class="phase-duration">Desarrollo continuo</div>
+                    <button class="expand-icon" id="icon-5" aria-expanded="false" aria-controls="content-5" onclick="togglePhase(5)" role="button">▼</button>
+                </div>
+                <div class="phase-content" id="content-5">
+                    <ul>
+                        <li><strong>Infraestructura cultural:</strong> Salones y capilla renovados</li>
+                        <li><strong>Deporte de alto nivel:</strong> Canchas de pádel y gimnasio de élite</li>
+                        <li><strong>Transporte inteligente:</strong> Alquiler vs. compra de vehículos</li>
+                        <li><strong>Eventos corporativos:</strong> Franquicias autorizadas</li>
+                        <li><strong>Capacitación:</strong> Personal profesional y actualizado</li>
+                    </ul>
+                    <p><strong>Resultado:</strong> Club integral con servicios premium y diversificación de ingresos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="container">
+            <h2>🎯 Beneficios para Nuestros Socios</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Beneficios Inmediatos</h3>
+                    <p>Instalaciones limpias, servicios básicos funcionando, tranquilidad legal y financiera desde el primer día.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏋️</div>
+                    <h3>Mediano Plazo</h3>
+                    <p>Gimnasio moderno, actividades deportivas renovadas, piscina temperada y espacios de calidad.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏆</div>
+                    <h3>Largo Plazo</h3>
+                    <p>Club integral familiar, servicios de salud preventiva, tecnología moderna y entretenimiento diversificado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="transparency-section">
+        <div class="container">
+            <h2>🔍 Compromiso con la Transparencia</h2>
+            <div class="commitment-grid">
+                <div class="commitment-card">
+                    <div class="commitment-icon">📊</div>
+                    <h3>Reportes Mensuales</h3>
+                    <p>Informes financieros detallados y auditorías externas regulares</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-icon">🗳️</div>
+                    <h3>Participación Democrática</h3>
+                    <p>Asambleas trimestrales y comités de socios por áreas de interés</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-icon">💻</div>
+                    <h3>Plataforma Digital</h3>
+                    <p>Sistema online para votaciones, sugerencias y seguimiento de proyectos</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-icon">🌱</div>
+                    <h3>Sostenibilidad</h3>
+                    <p>Energías renovables, eficiencia energética y autosostenibilidad económica</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <h3>🤝 Juntos Construiremos el Futuro</h3>
+            <p>Mi compromiso es trabajar con transparencia, eficiencia y dedicación para hacer realidad esta visión de progreso para nuestro querido Club Deportivo Cultural Lima.</p>
+            <div class="contact-info">
+                <div>
+                    <h4>📧 Contacto</h4>
+                    <p>Para consultas y sugerencias</p>
+                </div>
+                <div>
+                    <h4>🗓️ Cronograma</h4>
+                    <p>Implementación por fases</p>
+                </div>
+                <div>
+                    <h4>💡 Propuestas</h4>
+                    <p>Siempre abierto a nuevas ideas</p>
+                </div>
+            </div>
+            <p style="margin-top: 2rem; opacity: 0.8;">© 2025 - Propuesta Electoral Club Deportivo Cultural Lima</p>
+        </div>
+    </footer>
+
+    <script>
+        // Función para alternar la visibilidad de las fases del plan (acordeón)
+        function togglePhase(phaseNumber) {
+            const content = document.getElementById(`content-${phaseNumber}`);
+            const icon = document.getElementById(`icon-${phaseNumber}`);
+            const expanded = content.classList.contains('active');
+            // Actualiza aria-expanded para accesibilidad
+            icon.setAttribute('aria-expanded', (!expanded).toString());
+            if (expanded) {
+                content.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                // Cerrar todas las otras fases
+                for (let i = 1; i <= 5; i++) {
+                    if (i !== phaseNumber) {
+                        document.getElementById(`content-${i}`).classList.remove('active');
+                        document.getElementById(`icon-${i}`).classList.remove('rotated');
+                        document.getElementById(`icon-${i}`).setAttribute('aria-expanded', 'false');
+                    }
+                }
+                content.classList.add('active');
+                icon.classList.add('rotated');
+            }
+        }
+
+        // Barra de progreso de scroll
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+
+        // Smooth scroll para enlaces
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animación de entrada para las tarjetas
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar todas las tarjetas de fase
+        document.querySelectorAll('.phase-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Observar tarjetas de beneficios
+        document.querySelectorAll('.benefit-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
