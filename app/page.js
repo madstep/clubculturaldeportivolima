@@ -113,6 +113,7 @@ export default function Page() {
     setText("hours", hours);
     setText("minutes", minutes);
     setText("seconds", seconds);
+    // opcional: actualizar aria-label o título para accesibilidad
   };
 
   // run once immediately and then every second
