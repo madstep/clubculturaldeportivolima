@@ -28,7 +28,7 @@ export default function Page() {
     window.addEventListener("scroll", handleScroll);
 
     // --- Countdown ---
-    const targetDate = new Date(2025, 10, 2, 0, 8, 0).getTime(); // 2 noviembre 2025 00:08
+    const targetDate = new Date("2025-11-02T00:08:00-05:00").getTime(); // 2 noviembre 2025 00:08
     const updateCountdown = () => {
       const now = Date.now();
       const distance = targetDate - now;
