@@ -110,7 +110,7 @@ export default function Page() {
         <section className="hero">
           <div className="hero-content">
             <div className="club-logo">
-              <img src="logo_cultural_lima.png" alt="Logo CCDL" className="logo" />
+              <img src="/logo_cultural_lima.png" alt="Logo CCDL" className="logo" />
             </div>
             <h1>El corazón del CCDL late en cada uno de nosotros</h1>
             <div className="heart-container">
