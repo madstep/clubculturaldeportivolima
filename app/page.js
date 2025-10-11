@@ -27,28 +27,86 @@ export default function Page() {
     };
     window.addEventListener("scroll", handleScroll);
 
-    // --- Countdown ---
-    const targetDate = new Date(2025, 10, 2, 0, 8, 0); // 2 noviembre 2025 00:08
-      const updateCountdown = () => {
-    const now = new Date();
-    // diferencia en milisegundos
-    const distance = targetDate.getTime() - now.getTime();
+    // ---- CONFIG ----
+  const YEAR = 2025, MONTH_INDEX = 10, DAY = 2, HR = 0, MIN = 8, SEC = 0; // 2 Nov 2025 00:08
+  const ISO_WITH_OFFSET = "2025-11-02T00:08:00-05:00"; // explícito -05:00 (Lima)
 
+  // ---- helper para escribir debug overlay ----
+  let debugEl = document.getElementById("__countdown_debug");
+  if (!debugEl) {
+    debugEl = document.createElement("div");
+    debugEl.id = "__countdown_debug";
+    debugEl.style.position = "fixed";
+    debugEl.style.right = "8px";
+    debugEl.style.bottom = "8px";
+    debugEl.style.zIndex = "99999";
+    debugEl.style.background = "rgba(0,0,0,0.7)";
+    debugEl.style.color = "white";
+    debugEl.style.padding = "8px 10px";
+    debugEl.style.fontSize = "12px";
+    debugEl.style.borderRadius = "8px";
+    debugEl.style.maxWidth = "320px";
+    debugEl.style.lineHeight = "1.2";
+    document.body.appendChild(debugEl);
+  }
+
+  const logDebug = (txt) => {
+    console.log(txt);
+    debugEl.innerText = txt; // último mensaje (puedes mejorar mostrando varios)
+  };
+
+  // ---- crear targets con 3 métodos ----
+  const target_local_ctor = new Date(YEAR, MONTH_INDEX, DAY, HR, MIN, SEC); // local constructor
+  const target_iso_offset = new Date(ISO_WITH_OFFSET); // ISO with explicit -05:00
+  const target_utc = new Date(Date.UTC(YEAR, MONTH_INDEX, DAY, HR, MIN, SEC)); // interpretable como UTC for that Y/M/D/H
+
+  console.group("COUNTDOWN DEBUG");
+  console.log("Now (client local):", new Date().toString(), "timestamp:", Date.now());
+  console.log("Timezone offset (min):", new Date().getTimezoneOffset());
+  console.log("target_local_ctor:", target_local_ctor.toString(), "ts:", target_local_ctor.getTime());
+  console.log("target_iso_offset:", target_iso_offset.toString(), "ts:", target_iso_offset.getTime());
+  console.log("target_utc (Date.UTC):", target_utc.toString(), "ts:", target_utc.getTime());
+  console.groupEnd();
+
+  // show a condensed debug summary in the overlay
+  const summary = [
+    `Now: ${new Date().toLocaleString()}`,
+    `TZ offset (min): ${new Date().getTimezoneOffset()}`,
+    `Local ctor ts: ${target_local_ctor.getTime()} (${target_local_ctor.toLocaleString()})`,
+    `ISO -05 ts: ${target_iso_offset.getTime()} (${target_iso_offset.toLocaleString()})`,
+    `UTC ts: ${target_utc.getTime()} (${target_utc.toUTCString()})`,
+  ].join("\n");
+  logDebug(summary);
+
+  // ---- pick which target to use for the visible countdown ----
+  // Recommendation: usa ISO con offset si quieres hora en Lima: ISO_WITH_OFFSET
+  const targetTs = target_iso_offset.getTime();
+
+  // ---- countdown implementation (updates DOM ids you already have) ----
+  const updateCountdown = () => {
+    const now = Date.now();
+    const distance = targetTs - now;
+
+    // debug: print days difference (not too often, but once per second is ok)
+    const daysCalc = Math.floor(distance / (1000 * 60 * 60 * 24));
+    // update the overlay too (helpful while debugging)
+    debugEl.innerText = summary + `\n\ndistance(ms): ${distance}\nDias: ${daysCalc}`;
+
+    const secInMs = 1000;
     if (distance <= 0) {
       const section = document.querySelector(".countdown-section");
-      if (section) section.innerHTML = "<h3 style='font-size:2rem;'>¡Es día de elecciones! 🗳️</h3>";
+      if (section) section.innerHTML = `<h3 style="font-size:2rem;">¡Es día de elecciones! 🗳️</h3>`;
       return;
     }
 
-    // cálculo
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    const setText = (id, value) => {
+    const setText = (id, val) => {
       const el = document.getElementById(id);
-      if (el) el.textContent = String(value).padStart(2, "0");
+      if (el) el.textContent = String(val).padStart(2, "0");
     };
 
     setText("days", days);
@@ -57,8 +115,22 @@ export default function Page() {
     setText("seconds", seconds);
   };
 
-    updateCountdown();
-    const countdownInterval = setInterval(updateCountdown, 1000);
+  // run once immediately and then every second
+  updateCountdown();
+  const id = setInterval(updateCountdown, 1000);
+
+  // ---- check local system clock drift once ----
+  setTimeout(() => {
+    const clientNow = Date.now();
+    const clientDate = new Date();
+    // optional: compare with an authoritative time? Not available offline; but we can warn if client's TZ is weird:
+    const tzOffset = clientDate.getTimezoneOffset(); // minutes
+    if (Math.abs(tzOffset) > 12 * 60) {
+      console.warn("Timezone offset inesperado:", tzOffset);
+      logDebug("ATENCIÓN: offset de zona horaria inusual: " + tzOffset);
+    }
+  }, 1500);
+
 
     // --- Toggle fases ---
     window.togglePhase = (num) => {
@@ -139,7 +211,7 @@ export default function Page() {
 
     // --- Cleanup ---
     return () => {
-      clearInterval(countdownInterval);
+      clearInterval(id);
       window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("keydown", handleKeydown);
     };
