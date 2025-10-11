@@ -332,6 +332,7 @@ export default function Page() {
               </div>
             </div>
           </div>
+          </div>
       </section>
         {/* Aquí continúa tu HTML original (timeline, phases, etc.) */}
 
