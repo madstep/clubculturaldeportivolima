@@ -299,7 +299,67 @@ export default function Page() {
             </div>
         </div>
     </section>
+    <div className="section-divider"></div>
 
+          <section className="py-16 bg-white transparency-section">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            👥 Nuestro Equipo de Trabajo
+          </h2>
+
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-10 leading-relaxed">
+            Contamos con un equipo de profesionales comprometidos y expertos en sus áreas
+            para llevar adelante esta transformación.
+          </p>
+
+          <div
+            id="team-grid"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+          >
+            <div className="team-member-card col-span-full max-w-3xl mx-auto bg-white shadow-lg rounded-2xl overflow-hidden transform transition-all duration-500 hover:scale-[1.01] opacity-95">
+              <div className="team-photo h-52 relative bg-gray-100 flex items-center justify-center">
+                <Image
+                  src="/cabecera.png"
+                  alt="Profesionales Comprometidos con el Cambio"
+                  fill
+                  className="object-contain p-4"
+                />
+              </div>
+
+              <div className="team-info p-6">
+                <h3 className="text-xl font-semibold mb-1">
+                  Profesionales Comprometidos con el Cambio
+                </h3>
+                <p className="text-gray-500 mb-4">
+                  Lista 1 – Consejo Directivo 2025 – 2027
+                </p>
+
+                <p className="text-base text-gray-600 leading-relaxed text-center mb-8">
+                  Un equipo sólido de 17 profesionales comprometidos con la
+                  transformación del Club Cultural Deportivo Lima. Cada miembro aporta
+                  experiencia, dedicación y pasión para trabajar juntos en beneficio de
+                  todos los socios, garantizando transparencia, modernización e inclusión
+                  en cada decisión.
+                </p>
+
+                <div className="text-center">
+                  <Image
+                    src="/Lista_1.jpg"
+                    alt="Lista 1 - Consejo Directivo 2025-2027"
+                    width={800}
+                    height={500}
+                    className="rounded-xl shadow-md cursor-pointer transition hover:opacity-90 mx-auto"
+                    onClick={openModal}
+                  />
+                  <p className="text-gray-500 text-sm mt-3">
+                    👆 Haz clic en la imagen para ampliarla
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
         {/* Aquí continúa tu HTML original (timeline, phases, etc.) */}
 
 
