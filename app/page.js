@@ -105,7 +105,7 @@ export default function Page() {
           </svg>
         </a>
 
-        {/* --- Contenido principal (todo tu HTML dentro de JSX) --- */}
+        {/* --- Contenido principal (todoe tu HTML dentro de JSX) --- */}
         <section className="hero">
           <div className="hero-content">
             <div className="club-logo">
