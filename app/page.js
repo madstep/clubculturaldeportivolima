@@ -342,7 +342,106 @@ export default function Page() {
         {/* Aquí continúa tu HTML original (timeline, phases, etc.) */}
         <div className="section-divider"></div>
 
-    
+    <section className="transparency-section" style={{ background: "white" }}>
+  <div className="container">
+    <h2>🔍 Compromiso con la Transparencia</h2>
+
+    <div className="commitment-grid">
+      <div className="commitment-card">
+        <div className="commitment-icon">📊</div>
+        <h3>Reportes Mensuales</h3>
+        <p>Informes financieros detallados y auditorías externas regulares.</p>
+      </div>
+
+      <div className="commitment-card">
+        <div className="commitment-icon">🗳️</div>
+        <h3>Participación Democrática</h3>
+        <p>Asambleas trimestrales y comités de socios por áreas de interés.</p>
+      </div>
+
+      <div className="commitment-card">
+        <div className="commitment-icon">💻</div>
+        <h3>Plataforma Digital</h3>
+        <p>Sistema online para votaciones, sugerencias y seguimiento de proyectos.</p>
+      </div>
+
+      <div className="commitment-card">
+        <div className="commitment-icon">🌱</div>
+        <h3>Sostenibilidad</h3>
+        <p>Energías renovables, eficiencia energética y autosostenibilidad económica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer className="footer">
+  <div className="container">
+    <h3>🤝 Juntos Construiremos el Futuro de Nuestro Club</h3>
+    <p>
+      Nuestro compromiso es trabajar con transparencia, eficiencia y dedicación para hacer realidad esta visión de progreso para nuestro querido Club Cultural Deportivo Lima.
+    </p>
+
+    <div className="contact-info">
+      <div>
+        <h4>📱 Juan Alberto Jara "Frejol" te escucha</h4>
+        <p>Escanea el código QR para unirte a nuestro grupo de WhatsApp</p>
+
+        <a
+          href="https://chat.whatsapp.com/HhDKe19pgl8EeggcRZjwxX"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none" }}
+        >
+          <div
+            style={{
+              background: "white",
+              padding: "1.5rem",
+              borderRadius: "15px",
+              display: "inline-block",
+              marginTop: "1rem",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              border: "3px solid transparent",
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.borderColor = "#25D366";
+              e.currentTarget.style.transform = "scale(1.05)";
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.borderColor = "transparent";
+              e.currentTarget.style.transform = "scale(1)";
+            }}
+          >
+            <img
+              src="qr-code-whatsapp.png"
+              alt="QR de WhatsApp - Frejol"
+              style={{ width: "auto", height: "150px" }}
+            />
+            <p style={{ color: "#0D4F8B", fontWeight: "bold", marginTop: "0.5rem" }}>
+              👆 Únete al grupo
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div>
+        <h4>🗓️ Cronograma</h4>
+        <p>Implementación por fases con transparencia total.</p>
+      </div>
+
+      <div>
+        <h4>💡 Propuestas</h4>
+        <p>Siempre abierto a nuevas ideas de nuestros socios.</p>
+      </div>
+    </div>
+
+    <p style={{ marginTop: "2rem", opacity: 0.8 }}>
+      © 2025 - <span style={{ fontWeight: "bolder" }}>Juan Alberto Jara "Frejol" - Lista 1</span>
+      <br />
+      Club Cultural Deportivo Lima
+    </p>
+  </div>
+</footer>
 
       </div>
     </>
