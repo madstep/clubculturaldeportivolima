@@ -1,10 +1,11 @@
 "use client";
 
 import Head from "next/head";
+import { Analytics } from '@vercel/analytics/next';
 
 export default function HomePage() {
   return (
-    <>
+    <><Analytics />
       <Head>
         <title>
           Juan Alberto Jara "Frejol" - Marca x la Lista 1 - Propuesta 2025-2027 | CCDL
