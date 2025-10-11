@@ -277,6 +277,29 @@ export default function Page() {
         </div>
     </section>
        <div className="section-divider"></div>
+         <section className="benefits-section">
+        <div className="container">
+            <h2>🎯 Beneficios para Nuestros Socios</h2>
+            <div className="benefits-grid">
+                <div className="benefit-card">
+                    <div className="benefit-icon">⚡</div>
+                    <h3>Beneficios Inmediatos</h3>
+                    <p>Instalaciones limpias, servicios básicos funcionando, tranquilidad legal y financiera desde el primer día.</p>
+                </div>
+                <div className="benefit-card">
+                    <div className="benefit-icon">🏋️</div>
+                    <h3>Mediano Plazo</h3>
+                    <p>Gimnasio moderno, actividades deportivas renovadas, piscina temperada y espacios de calidad.</p>
+                </div>
+                <div className="benefit-card">
+                    <div className="benefit-icon">🏆</div>
+                    <h3>Largo Plazo</h3>
+                    <p>Club integral familiar, servicios de salud preventiva, tecnología moderna y entretenimiento diversificado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
         {/* Aquí continúa tu HTML original (timeline, phases, etc.) */}
 
 
