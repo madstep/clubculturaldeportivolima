@@ -10,32 +10,34 @@ export default function Page() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // --- VERCEL ANALYTICS ---
+    // --- Script de Vercel Analytics ---
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     const script = document.createElement("script");
     script.defer = true;
     script.src = "/_vercel/insights/script.js";
     document.head.appendChild(script);
 
-    // --- SCROLL PROGRESS BAR ---
+    // --- Scroll progress ---
+    const progress = document.getElementById("scroll-progress");
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       const docHeight = document.body.scrollHeight - window.innerHeight;
       const progressWidth = (scrollTop / docHeight) * 100;
-      const progress = document.getElementById("scroll-progress");
       if (progress) progress.style.width = progressWidth + "%";
     };
     window.addEventListener("scroll", handleScroll);
 
-    // --- COUNTDOWN (Elecciones) ---
-    const targetDate = new Date("2025-11-02T00:08:00").getTime();
+    // --- Countdown ---
+    const targetDate = new Date(2025, 10, 2, 0, 8, 0).getTime(); // 2 noviembre 2025 00:08
     const updateCountdown = () => {
-      const now = new Date().getTime();
+      const now = Date.now();
       const distance = targetDate - now;
 
-      if (distance < 0) {
-        const section = document.querySelector(".countdown-section");
-        if (section) section.innerHTML = `<h3 style="font-size:2rem;">¡Es día de elecciones! 🗳️</h3>`;
+      const section = document.querySelector(".countdown-section");
+      if (!section) return;
+
+      if (distance <= 0) {
+        section.innerHTML = `<h3 style="font-size: 2rem;">¡Es día de elecciones! 🗳️</h3>`;
         return;
       }
 
@@ -44,9 +46,9 @@ export default function Page() {
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      const setText = (id, val) => {
+      const setText = (id, value) => {
         const el = document.getElementById(id);
-        if (el) el.textContent = String(val).padStart(2, "0");
+        if (el) el.textContent = String(value).padStart(2, "0");
       };
 
       setText("days", days);
@@ -54,47 +56,45 @@ export default function Page() {
       setText("minutes", minutes);
       setText("seconds", seconds);
     };
-    const countdownInterval = setInterval(updateCountdown, 1000);
-    updateCountdown();
 
-    // --- TOGGLE PHASES ---
+    updateCountdown();
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    // --- Toggle fases ---
     window.togglePhase = (num) => {
-      for (let i = 1; i <= 5; i++) {
-        const content = document.getElementById(`content-${i}`);
-        const icon = document.getElementById(`icon-${i}`);
-        if (!content || !icon) continue;
-        if (i === num) {
-          const active = content.classList.toggle("active");
-          icon.classList.toggle("rotated", active);
-        } else {
-          content.classList.remove("active");
-          icon.classList.remove("rotated");
-        }
+      const content = document.getElementById(`content-${num}`);
+      const icon = document.getElementById(`icon-${num}`);
+      if (!content || !icon) return;
+
+      const active = content.classList.contains("active");
+      document.querySelectorAll(".phase-content").forEach((el) => el.classList.remove("active"));
+      document.querySelectorAll(".expand-icon").forEach((el) => el.classList.remove("rotated"));
+
+      if (!active) {
+        content.classList.add("active");
+        icon.classList.add("rotated");
       }
     };
 
-    // --- SMOOTH SCROLL LINKS ---
+    // --- Smooth scroll ---
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", (e) => {
         e.preventDefault();
-        document.querySelector(anchor.getAttribute("href"))?.scrollIntoView({
-          behavior: "smooth",
-        });
+        const target = document.querySelector(anchor.getAttribute("href"));
+        if (target) target.scrollIntoView({ behavior: "smooth" });
       });
     });
 
-    // --- FADE-IN OBSERVER (Animaciones al hacer scroll) ---
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-    );
+    // --- Observer para animaciones ---
+    const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+        }
+      });
+    }, observerOptions);
 
     document.querySelectorAll(".phase-card, .benefit-card").forEach((card) => {
       card.style.opacity = "0";
@@ -103,43 +103,48 @@ export default function Page() {
       observer.observe(card);
     });
 
-    // --- MODAL FUNCTIONS ---
+    // --- Modal control ---
     const openModal = () => {
       const modal = document.getElementById("imageModal");
-      if (!modal) return;
-      modal.style.display = "flex";
-      document.body.style.overflow = "hidden";
+      if (modal) {
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
     };
 
     const closeModal = () => {
       const modal = document.getElementById("imageModal");
-      if (!modal) return;
-      modal.style.display = "none";
-      document.body.style.overflow = "auto";
+      if (modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+      }
     };
 
     window.openModal = openModal;
     window.closeModal = closeModal;
 
-    const handleKeydown = (e) => {
-      if (e.key === "Escape") closeModal();
+    // Cerrar modal con tecla ESC
+    const handleKeydown = (event) => {
+      if (event.key === "Escape") closeModal();
     };
     document.addEventListener("keydown", handleKeydown);
 
-    const modal = document.getElementById("imageModal");
-    if (modal) {
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeModal();
+    // Cerrar modal clic fuera
+    const modalEl = document.getElementById("imageModal");
+    if (modalEl) {
+      modalEl.addEventListener("click", (e) => {
+        if (e.target === modalEl) closeModal();
       });
     }
 
-    // --- LIMPIEZA ---
+    // --- Cleanup ---
     return () => {
       clearInterval(countdownInterval);
       window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("keydown", handleKeydown);
     };
   }, []);
+
 
   return (
     <>
