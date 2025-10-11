@@ -2,7 +2,6 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import { useEffect } from "react";
 import { useState } from "react";
-import Head from "next/head";
 import Image from "next/image";
 import { Analytics } from "@vercel/analytics/next"
 
