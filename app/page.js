@@ -520,6 +520,19 @@ export default function Page() {
 </footer>
 
       </div>
+       {isModalOpen && (
+        <div
+          id="imageModal"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          onClick={closeModal}
+        >
+          <img
+            src="/Lista_1.jpg"
+            alt="Lista 1 - Consejo Directivo 2025-2027"
+            className="max-w-3xl rounded-lg shadow-lg animate-fadeIn"
+          />
+        </div>
+      )}
     </>
   );
 }
