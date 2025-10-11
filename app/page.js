@@ -79,7 +79,7 @@ export default function HomePage() {
             <div className="club-logo">
               <img src="/logo_cultural_lima.png" alt="Logo CCDL" className="logo" />
             </div>
-            <h1>El corazón del CCDL late...</h1>
+            <h1>El corazón del CCDL latesss...</h1>
           </div>
         </section>
       </div>
