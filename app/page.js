@@ -64,7 +64,7 @@ export default function Page() {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-  
+
   return (
     <>
     <Analytics />
@@ -306,64 +306,32 @@ export default function Page() {
     </section>
     <div className="section-divider"></div>
 
-          <section className="py-16 bg-white transparency-section">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <section className="transparency-section">
+        <div className="container">
+          <h2 >
             👥 Nuestro Equipo de Trabajo
           </h2>
 
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-10 leading-relaxed">
-            Contamos con un equipo de profesionales comprometidos y expertos en sus áreas
-            para llevar adelante esta transformación.
-          </p>
+          <p style={{ textAlign: "center", maxWidth: "800px", margin: "0 auto 2rem", fontSize: "1.1rem", color: "#666" }}>Contamos con un equipo de profesionales comprometidos y expertos en sus áreas para llevar adelante esta transformación.</p>
 
-          <div
-            id="team-grid"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
-          >
-            <div className="team-member-card col-span-full max-w-3xl mx-auto bg-white shadow-lg rounded-2xl overflow-hidden transform transition-all duration-500 hover:scale-[1.01] opacity-95">
-              <div className="team-photo h-52 relative bg-gray-100 flex items-center justify-center">
-                <Image
-                  src="/cabecera.png"
-                  alt="Profesionales Comprometidos con el Cambio"
-                  fill
-                  className="object-contain p-4"
-                />
+          <div id="team-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "2rem", marginBottom: "4rem" }}>
+            {/* Los miembros del equipo se agregarán aquí mediante JavaScript */}
+            <div className="team-member-card" style={{ opacity: 0.9, transform: "translateY(0px)", transition: "0.6s", gridColumn: "1 / -1", maxWidth: "800px", margin: "0px auto" }}>
+              <div className="team-photo" style={{ height: "200px", fontSize: "6rem" }}>
+                <img src="cabecera.png" alt="Profesionales Comprometidos con el Cambio" />
               </div>
-
-              <div className="team-info p-6">
-                <h3 className="text-xl font-semibold mb-1">
-                  Profesionales Comprometidos con el Cambio
-                </h3>
-                <p className="text-gray-500 mb-4">
-                  Lista 1 – Consejo Directivo 2025 – 2027
-                </p>
-
-                <p className="text-base text-gray-600 leading-relaxed text-center mb-8">
-                  Un equipo sólido de 17 profesionales comprometidos con la
-                  transformación del Club Cultural Deportivo Lima. Cada miembro aporta
-                  experiencia, dedicación y pasión para trabajar juntos en beneficio de
-                  todos los socios, garantizando transparencia, modernización e inclusión
-                  en cada decisión.
-                </p>
-
-                <div className="text-center">
-                  <Image
-                    src="/Lista_1.jpg"
-                    alt="Lista 1 - Consejo Directivo 2025-2027"
-                    width={800}
-                    height={500}
-                    className="rounded-xl shadow-md cursor-pointer transition hover:opacity-90 mx-auto"
-                    onClick={openModal}
-                  />
-                  <p className="text-gray-500 text-sm mt-3">
-                    👆 Haz clic en la imagen para ampliarla
-                  </p>
+              <div className="team-info">
+                <div className="team-name">Profesionales Comprometidos con el Cambio</div>
+                <div className="team-role">Lista 1 - Consejo Directivo 2025 - 2027</div>
+                <div className="team-description" style={{ textAlign: "center", fontSize: "1rem", lineHeight: "1.8" }}>Un equipo sólido de 17 profesionales comprometidos con la transformación del Club Cultural Deportivo Lima. Cada miembro aporta experiencia, dedicación y pasión para trabajar juntos en beneficio de todos los socios, garantizando transparencia, modernización e inclusión en cada decisión.</div>
+                {/* Imagen de la lista de candidatos */}
+                <div className="image-container" style={{ textAlign: "center", marginBottom: "3rem" }}>
+                  <img src="/Lista_1.jpg" alt="Lista 1 - Consejo Directivo 2025-2027" className="team-list-image" id="teamListImage" onClick={openModal} />
+                  <p style={{ color: "#666", fontSize: "0.9rem", marginTop: "1rem" }}>👆 Haz clic en la imagen para ampliarla</p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
       </section>
         {/* Aquí continúa tu HTML original (timeline, phases, etc.) */}
 
