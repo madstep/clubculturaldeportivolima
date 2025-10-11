@@ -334,8 +334,41 @@ export default function Page() {
           </div>
           </div>
       </section>
+       {/* Modal para imagen ampliada */}
+<div id="imageModal" style={{ display: "none", position: "fixed", zIndex: 1000, left: 0, top: 0, width: "100%", height: "100%", backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: "1rem", animation: "fadeIn 0.3s ease" }}>
+  <span style={{ position: "absolute", top: "15px", right: "25px", color: "#fff", fontSize: "40px", fontWeight: "bold", cursor: "pointer", userSelect: "none" }} onClick={closeModal}>&times;</span>
+  <img id="modalImage" src="/Lista_1.jpg" alt="Imagen ampliada" style={{ width: "100%", maxWidth: "800px", height: "auto", borderRadius: "10px", boxShadow: "0 0 20px rgba(255,255,255,0.3)", animation: "zoomIn 0.3s ease" }} />
+</div>
         {/* Aquí continúa tu HTML original (timeline, phases, etc.) */}
+        <div className="section-divider"></div>
 
+    <section className="transparency-section" style= {{background: white}}>
+        <div className="container">
+            <h2>🔍 Compromiso con la Transparencia</h2>
+            <div className="commitment-grid">
+                <div className="commitment-card">
+                    <div className="commitment-icon">📊</div>
+                    <h3>Reportes Mensuales</h3>
+                    <p>Informes financieros detallados y auditorías externas regulares</p>
+                </div>
+                <div className="commitment-card">
+                    <div className="commitment-icon">🗳️</div>
+                    <h3>Participación Democrática</h3>
+                    <p>Asambleas trimestrales y comités de socios por áreas de interés</p>
+                </div>
+                <div className="commitment-card">
+                    <div className="commitment-icon">💻</div>
+                    <h3>Plataforma Digital</h3>
+                    <p>Sistema online para votaciones, sugerencias y seguimiento de proyectos</p>
+                </div>
+                <div className="commitment-card">
+                    <div className="commitment-icon">🌱</div>
+                    <h3>Sostenibilidad</h3>
+                    <p>Energías renovables, eficiencia energética y autosostenibilidad económica</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
       </div>
