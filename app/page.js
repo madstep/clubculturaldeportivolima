@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
+import { Analytics } from "@vercel/analytics/next"
 
 export default function Page() {
   useEffect(() => {
@@ -61,6 +62,7 @@ export default function Page() {
 
   return (
     <>
+    <Analytics />
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
