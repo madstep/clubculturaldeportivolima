@@ -28,34 +28,34 @@ export default function Page() {
     window.addEventListener("scroll", handleScroll);
 
     // --- Countdown ---
-    const targetDate = new Date("2025-11-02T00:08:00-05:00").getTime(); // 2 noviembre 2025 00:08
-    const updateCountdown = () => {
-      const now = Date.now();
-      const distance = targetDate - now;
+    const targetDate = new Date(2025, 10, 2, 0, 8, 0); // 2 noviembre 2025 00:08
+      const updateCountdown = () => {
+    const now = new Date();
+    // diferencia en milisegundos
+    const distance = targetDate.getTime() - now.getTime();
 
+    if (distance <= 0) {
       const section = document.querySelector(".countdown-section");
-      if (!section) return;
+      if (section) section.innerHTML = "<h3 style='font-size:2rem;'>¡Es día de elecciones! 🗳️</h3>";
+      return;
+    }
 
-      if (distance <= 0) {
-        section.innerHTML = `<h3 style="font-size: 2rem;">¡Es día de elecciones! 🗳️</h3>`;
-        return;
-      }
+    // cálculo
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      const setText = (id, value) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = String(value).padStart(2, "0");
-      };
-
-      setText("days", days);
-      setText("hours", hours);
-      setText("minutes", minutes);
-      setText("seconds", seconds);
+    const setText = (id, value) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = String(value).padStart(2, "0");
     };
+
+    setText("days", days);
+    setText("hours", hours);
+    setText("minutes", minutes);
+    setText("seconds", seconds);
+  };
 
     updateCountdown();
     const countdownInterval = setInterval(updateCountdown, 1000);
