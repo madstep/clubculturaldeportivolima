@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { Analytics } from "@vercel/analytics/next"
@@ -63,6 +64,7 @@ export default function Page() {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  
   return (
     <>
     <Analytics />
