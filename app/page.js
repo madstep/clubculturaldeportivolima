@@ -2,10 +2,12 @@
 
 import Head from "next/head";
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export default function HomePage() {
   return (
     <><Analytics />
+    <SpeedInsights />
       <Head>
         <title>
           Juan Alberto Jara "Frejol" - Marca x la Lista 1 - Propuesta 2025-2027 | CCDL
