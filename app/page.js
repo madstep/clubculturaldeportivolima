@@ -176,39 +176,9 @@ export default function Page() {
       observer.observe(card);
     });
 
-    // --- Modal control ---
-    const openModal = () => {
-      const modal = document.getElementById("imageModal");
-      if (modal) {
-        modal.style.display = "flex";
-        document.body.style.overflow = "hidden";
-      }
-    };
+  
 
-    const closeModal = () => {
-      const modal = document.getElementById("imageModal");
-      if (modal) {
-        modal.style.display = "none";
-        document.body.style.overflow = "auto";
-      }
-    };
-
-    window.openModal = openModal;
-    window.closeModal = closeModal;
-
-    // Cerrar modal con tecla ESC
-    const handleKeydown = (event) => {
-      if (event.key === "Escape") closeModal();
-    };
-    document.addEventListener("keydown", handleKeydown);
-
-    // Cerrar modal clic fuera
-    const modalEl = document.getElementById("imageModal");
-    if (modalEl) {
-      modalEl.addEventListener("click", (e) => {
-        if (e.target === modalEl) closeModal();
-      });
-    }
+   
 
     // --- Cleanup ---
     return () => {
@@ -244,7 +214,7 @@ export default function Page() {
         <meta property="twitter:title" content="Juan Alberto Jara 'Frejol' - Marca x la Lista 1 - Unete al Cambio" />
         <meta property="twitter:description" content="Propuesta integral de la Lista 1 para transformar el Club Cultural Deportivo Lima." />
   <meta property="twitter:image" content="https://jjclubcultural.vercel.app/logo_cultural_lima.png"/>
-        <link rel="icon" href="logo.png" />
+        <link rel="icon" href="/logo.png" />
       </Head>
 
       <style>{`/* Pega aquí todo el CSS original tal cual */`}</style>
@@ -480,7 +450,7 @@ export default function Page() {
                 <div className="team-description" style={{ textAlign: "center", fontSize: "1rem", lineHeight: "1.8" }}>Un equipo sólido de 17 profesionales comprometidos con la transformación del Club Cultural Deportivo Lima. Cada miembro aporta experiencia, dedicación y pasión para trabajar juntos en beneficio de todos los socios, garantizando transparencia, modernización e inclusión en cada decisión.</div>
                 {/* Imagen de la lista de candidatos */}
                 <div className="image-container" style={{ textAlign: "center", marginBottom: "3rem" }}>
-                  <img src="/Lista_1.jpg" alt="Lista 1 - Consejo Directivo 2025-2027" className="team-list-image" id="teamListImage" onClick={openModal} />
+                  <img src="/Lista_1.jpg" alt="Lista 1 - Consejo Directivo 2025-2027" className="team-list-image" id="teamListImage" onClick={() => setIsModalOpen(true)}/>
                   <p style={{ color: "#666", fontSize: "0.9rem", marginTop: "1rem" }}>👆 Haz clic en la imagen para ampliarla</p>
                 </div>
               </div>
@@ -490,7 +460,7 @@ export default function Page() {
       </section>
        {/* Modal para imagen ampliada */}
 <div id="imageModal" style={{ display: "none", position: "fixed", zIndex: 1000, left: 0, top: 0, width: "100%", height: "100%", backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: "1rem", animation: "fadeIn 0.3s ease" }}>
-  <span style={{ position: "absolute", top: "15px", right: "25px", color: "#fff", fontSize: "40px", fontWeight: "bold", cursor: "pointer", userSelect: "none" }} onClick={closeModal}>&times;</span>
+  <span style={{ position: "absolute", top: "15px", right: "25px", color: "#fff", fontSize: "40px", fontWeight: "bold", cursor: "pointer", userSelect: "none" }} onClick={() => setIsModalOpen(false)}>&times;</span>
   <img id="modalImage" src="/Lista_1.jpg" alt="Imagen ampliada" style={{ width: "100%", maxWidth: "800px", height: "auto", borderRadius: "10px", boxShadow: "0 0 20px rgba(255,255,255,0.3)", animation: "zoomIn 0.3s ease" }} />
 </div>
         {/* Aquí continúa tu HTML original (timeline, phases, etc.) */}
