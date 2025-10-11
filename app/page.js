@@ -7,63 +7,139 @@ import Image from "next/image";
 import { Analytics } from "@vercel/analytics/next"
 
 export default function Page() {
-  useEffect(() => {
-    // Script de Vercel Analytics
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  useEffect(() => {
+    // --- VERCEL ANALYTICS ---
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     const script = document.createElement("script");
     script.defer = true;
     script.src = "/_vercel/insights/script.js";
     document.head.appendChild(script);
 
-    // Scroll progress bar
-    const progress = document.getElementById("scroll-progress");
+    // --- SCROLL PROGRESS BAR ---
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       const docHeight = document.body.scrollHeight - window.innerHeight;
       const progressWidth = (scrollTop / docHeight) * 100;
-      progress.style.width = progressWidth + "%";
+      const progress = document.getElementById("scroll-progress");
+      if (progress) progress.style.width = progressWidth + "%";
     };
     window.addEventListener("scroll", handleScroll);
 
-    // Countdown
-    const targetDate = new Date("2025-12-15T00:00:00").getTime();
+    // --- COUNTDOWN (Elecciones) ---
+    const targetDate = new Date("2025-11-02T00:08:00").getTime();
     const updateCountdown = () => {
       const now = new Date().getTime();
       const distance = targetDate - now;
-      if (distance < 0) return;
-      document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-      document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
-    };
-    updateCountdown();
-    const interval = setInterval(updateCountdown, 1000);
 
-    // Toggle fases
+      if (distance < 0) {
+        const section = document.querySelector(".countdown-section");
+        if (section) section.innerHTML = `<h3 style="font-size:2rem;">¡Es día de elecciones! 🗳️</h3>`;
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      const setText = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = String(val).padStart(2, "0");
+      };
+
+      setText("days", days);
+      setText("hours", hours);
+      setText("minutes", minutes);
+      setText("seconds", seconds);
+    };
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // --- TOGGLE PHASES ---
     window.togglePhase = (num) => {
-      const content = document.getElementById(`content-${num}`);
-      const icon = document.getElementById(`icon-${num}`);
-      if (content.classList.contains("active")) {
-        content.classList.remove("active");
-        icon.classList.remove("rotated");
-      } else {
-        document.querySelectorAll(".phase-content").forEach(el => el.classList.remove("active"));
-        document.querySelectorAll(".expand-icon").forEach(el => el.classList.remove("rotated"));
-        content.classList.add("active");
-        icon.classList.add("rotated");
+      for (let i = 1; i <= 5; i++) {
+        const content = document.getElementById(`content-${i}`);
+        const icon = document.getElementById(`icon-${i}`);
+        if (!content || !icon) continue;
+        if (i === num) {
+          const active = content.classList.toggle("active");
+          icon.classList.toggle("rotated", active);
+        } else {
+          content.classList.remove("active");
+          icon.classList.remove("rotated");
+        }
       }
     };
 
+    // --- SMOOTH SCROLL LINKS ---
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", (e) => {
+        e.preventDefault();
+        document.querySelector(anchor.getAttribute("href"))?.scrollIntoView({
+          behavior: "smooth",
+        });
+      });
+    });
+
+    // --- FADE-IN OBSERVER (Animaciones al hacer scroll) ---
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    document.querySelectorAll(".phase-card, .benefit-card").forEach((card) => {
+      card.style.opacity = "0";
+      card.style.transform = "translateY(40px)";
+      card.style.transition = "all 0.6s ease";
+      observer.observe(card);
+    });
+
+    // --- MODAL FUNCTIONS ---
+    const openModal = () => {
+      const modal = document.getElementById("imageModal");
+      if (!modal) return;
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeModal = () => {
+      const modal = document.getElementById("imageModal");
+      if (!modal) return;
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+    };
+
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+
+    const handleKeydown = (e) => {
+      if (e.key === "Escape") closeModal();
+    };
+    document.addEventListener("keydown", handleKeydown);
+
+    const modal = document.getElementById("imageModal");
+    if (modal) {
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+    }
+
+    // --- LIMPIEZA ---
     return () => {
-      clearInterval(interval);
+      clearInterval(countdownInterval);
       window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("keydown", handleKeydown);
     };
   }, []);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   return (
     <>
