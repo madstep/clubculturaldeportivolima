@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Head from "next/head";
+import Image from "next/image";
 
 export default function Page() {
   useEffect(() => {
@@ -74,14 +75,12 @@ export default function Page() {
         <meta property="og:url" content="https://jjclubcultural.vercel.app/" />
         <meta property="og:title" content="Juan Alberto Jara 'Frejol' - Marca x la Lista 1 - Unete al Cambio" />
         <meta property="og:description" content="Propuesta integral de la Lista 1 para transformar el Club Cultural Deportivo Lima. Transparencia, modernización e inclusión para todos los socios." />
-        <meta property="og:image" content="https://jjclubcultural.vercel.app/logo_cultural_lima.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://jjclubcultural.vercel.app/" />
         <meta property="twitter:title" content="Juan Alberto Jara 'Frejol' - Marca x la Lista 1 - Unete al Cambio" />
         <meta property="twitter:description" content="Propuesta integral de la Lista 1 para transformar el Club Cultural Deportivo Lima." />
-        <meta property="twitter:image" content="https://jjclubcultural.vercel.app/logo_cultural_lima.png" />
 
         <link rel="icon" href="logo.png" />
       </Head>
