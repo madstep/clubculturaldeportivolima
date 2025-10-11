@@ -190,30 +190,30 @@ export default function Page() {
   return (
     <>
     <Analytics />
-      <Head>
+     {/*  <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <title>Juan Alberto Jara "Frejol" - Marca x la Lista 1 - Propuesta 2025-2027 | CCDL</title>
         <meta name="description" content="Conoce la propuesta de Juan Alberto Jara 'Frejol' para el Club Cultural Deportivo Lima. Plan integral de trabajo 2025-2027: transparencia, modernización e inclusión." />
         <meta name="keywords" content="ACCCDL,CCDL, Club Cultural Deportivo Lima, Juan Alberto Jara Arias, Frejol, elecciones 2025, lista 1, propuesta electoral" />
-        <meta name="author" content="Carlos Alberto Obregón Guerra" />
+        <meta name="author" content="Carlos Alberto Obregón Guerra" />*/}
 
-        {/* Open Graph */}
+        {/* Open Graph 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://jjclubcultural.vercel.app/" />
         <meta property="og:title" content="Juan Alberto Jara 'Frejol' - Marca x la Lista 1 - Unete al Cambio" />
         <meta property="og:description" content="Propuesta integral de la Lista 1 para transformar el Club Cultural Deportivo Lima. Transparencia, modernización e inclusión para todos los socios." />
-        <meta property="og:image" content="https://jjclubcultural.vercel.app/logo_cultural_lima.png" />
+        <meta property="og:image" content="https://jjclubcultural.vercel.app/logo_cultural_lima.png" />*/}
     
-        {/* Twitter */}
+        {/* Twitter
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://jjclubcultural.vercel.app/" />
         <meta property="twitter:title" content="Juan Alberto Jara 'Frejol' - Marca x la Lista 1 - Unete al Cambio" />
         <meta property="twitter:description" content="Propuesta integral de la Lista 1 para transformar el Club Cultural Deportivo Lima." />
   <meta property="twitter:image" content="https://jjclubcultural.vercel.app/logo_cultural_lima.png"/>
         <link rel="icon" href="/logo.png" />
-      </Head>
+      </Head>  */}
 
       <style>{`/* Pega aquí todo el CSS original tal cual */`}</style>
 
