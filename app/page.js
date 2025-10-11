@@ -1,5 +1,5 @@
 "use client";
-import { Head, Main, NextScript } from "next/document";
+
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Analytics } from "@vercel/analytics/next"
