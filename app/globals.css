@@ -40,3 +40,708 @@ a {
     color-scheme: dark;
   }
 }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+           /*  background: url('IMG_20251010_171914-Photoroom.png') no-repeat center center;
+            /*  background-size: cover;*/
+            background-attachment: fixed;
+             /* opacity: 0.1;🔧 Ajusta la opacidad según lo que quieras */
+            z-index: -1; /* Asegura que quede detrás de todo */
+        }
+        .hero {
+            background: linear-gradient(135deg, #0D4F8B 0%, #1a6bb8 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/><circle cx="20" cy="20" r="1" fill="white" opacity="0.1"/><circle cx="80" cy="30" r="1.5" fill="white" opacity="0.1"/></svg>');
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .club-logo {
+            margin: 0 auto 2rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .club-logo img {
+           
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #C41E3A, #e02e4a);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(196, 30, 58, 0.5);
+            background: linear-gradient(45deg, #e02e4a, #C41E3A);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .timeline {
+            padding: 4rem 0;
+            background: #f8f9fa;
+        }
+
+        .timeline h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #0D4F8B;
+            position: relative;
+        }
+
+        .timeline h2::after {
+            content: '';
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #C41E3A, #0D4F8B);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .phase-card {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(13, 79, 139, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(13, 79, 139, 0.2);
+            border-color: #0D4F8B;
+        }
+
+        .phase-header {
+            background: linear-gradient(135deg, #0D4F8B 0%, #1a6bb8 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .phase-number {
+            background: rgba(255,255,255,0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid white;
+        }
+
+        .phase-title {
+            flex: 1;
+            margin: 0 1rem;
+        }
+
+        .phase-title h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-duration {
+            background: linear-gradient(45deg, #C41E3A, #e02e4a);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .phase-content {
+            padding: 2rem;
+            display: none;
+        }
+
+        .phase-content.active {
+            display: block;
+        }
+
+        .phase-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .phase-content li {
+            padding: 0.75rem 0;
+            border-left: 4px solid #C41E3A;
+            padding-left: 1rem;
+            margin: 0.5rem 0;
+            background: linear-gradient(90deg, rgba(196, 30, 58, 0.05) 0%, transparent 100%);
+        }
+
+        .phase-content strong {
+            color: #0D4F8B;
+        }
+
+        .benefits-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #0D4F8B 0%, #1a6bb8 100%);
+            color: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(196, 30, 58, 0.8);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #C41E3A, #e02e4a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.4);
+        }
+
+        .transparency-section {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .transparency-section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #0D4F8B;
+            position: relative;
+        }
+
+        .transparency-section h2::after {
+            content: '';
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #C41E3A, #0D4F8B);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .commitment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .commitment-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .commitment-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(13, 79, 139, 0.2);
+            border-color: #0D4F8B;
+        }
+
+        .commitment-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #0D4F8B, #1a6bb8);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(13, 79, 139, 0.3);
+        }
+
+        .commitment-card h3 {
+            color: #0D4F8B;
+            margin-bottom: 1rem;
+        }
+
+        .team-member-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(13, 79, 139, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .team-member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(13, 79, 139, 0.2);
+            border-color: #0D4F8B;
+        }
+
+        .team-photo {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #0D4F8B 0%, #1a6bb8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-photo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(196, 30, 58, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .team-info {
+            padding: 1.5rem;
+        }
+
+        .team-name {
+            color: #0D4F8B;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .team-role {
+            color: #C41E3A;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .team-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #0D4F8B 0%, #1a6bb8 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .contact-info > div {
+           
+            background: linear-gradient(135deg, #C41E3A 0%, #e02e4a 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .contact-info h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .whatsapp-section {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+            color: white;
+        }
+
+        .expand-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        .voting-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background:transparent;
+            color: #C41E3A;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            z-index: 10;
+            animation: pulse 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .phase-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+
+            .voting-number {
+                position: static;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #C41E3A, #0D4F8B);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, #C41E3A 0%, #0D4F8B 50%, #C41E3A 100%);
+            margin: 0;
+        }
+
+        .team-list-image{
+    width: 350px;
+    height: auto;
+        }
+
+        .logo {
+  width: auto;
+  height: auto;
+  max-height: 250px;
+  display: block;
+  margin: 0 auto;
+        }
+
+        @media (max-width: 600px) {
+  .logo {
+                max-height: 150px;
+            }
+  }
+
+        @media (max-width: 400px) {
+  .logo {
+                max-height: 130px;
+            }
+
+            .team-photo img {
+    content:url("banner-ccdl.png");
+    }
+  }
+
+   @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+  }
+
+  .heart-container {
+    display: inline-block;
+    animation: pulse 2s infinite;
+    transform-origin: center;
+  }
+
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 600px) {
+    #modalImage {
+        max-width: 95%;
+    }
+}
+
+/* Contenedor general */
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Imagen con sombra y transición */
+.team-list-image {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+    border: 3px solid #fff;
+}
+
+/* Efecto hover */
+.team-list-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(196, 30, 58, 0.4);
+}
+
+/* Ajustes responsive */
+@media (max-width: 600px) {
+    .team-list-image {
+        max-width: 90%;
+    }
+}
+
+
+
+/* --- Fondo fijo (site-bg) --- */
+.site-bg{
+  position: fixed;
+  inset: 0;
+  background: url('IMG_20251010_171914-Photoroom.png') no-repeat top center / cover;
+  background-attachment: fixed; /* fijado al viewport */
+  opacity: 0.35;         /* ajusta la visibilidad */
+  pointer-events: none;  /* no interfiere con clicks */
+  z-index: 0;
+}
+
+/* Contenido por encima del fondo */
+.page-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ajusta .hero para que deje ver el fondo debajo (semiprivado) */
+.hero {
+  /* cambia tu gradient opaco por uno semitransparente */
+  background: linear-gradient(135deg, rgba(13,79,139,0.86) 0%, rgba(26,107,184,0.86) 100%);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+        /* Botón flotante de WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+   .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+
+        /* Contador regresivo */
+        .countdown-section {
+            background: linear-gradient(135deg, #C41E3A 0%, #e02e4a 100%);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .countdown-item {
+            background: rgba(255,255,255,0.2);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            min-width: 100px;
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+/* Fallback para mobile (iOS no siempre acepta fixed) */
+@media (max-width: 1024px) {
+  .site-bg {
+    background-attachment: scroll; /* evita problemas en móviles */
+  }
+}
+
