@@ -784,6 +784,21 @@
                 Contamos con un equipo de profesionales comprometidos y expertos en sus áreas para llevar adelante esta transformación
             </p>
             
+            
+
+
+           <div id="team-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+                <!-- Los miembros del equipo se agregarán aquí mediante JavaScript -->
+            <div class="team-member-card" style="opacity: 1; transform: translateY(0px); transition: 0.6s; grid-column: 1 / -1; max-width: 800px; margin: 0px auto;">
+                <div class="team-photo" style="height: 200px; font-size: 6rem;">
+                    <img src="cabecera.png" alt="Profesionales Comprometidos con el Cambio">
+                </div>
+                <div class="team-info">
+                    <div class="team-name">Profesionales Comprometidos con el Cambio</div>
+                    <div class="team-role">Consejo Directivo 2025 - 2027</div>
+                    <div class="team-description" style="text-align: center; font-size: 1rem; line-height: 1.8;">Un equipo sólido de 17 profesionales comprometidos con la transformación del Club Cultural Deportivo Lima. Cada miembro aporta experiencia, dedicación y pasión para trabajar juntos en beneficio de todos los socios, garantizando transparencia, modernización e inclusión en cada decisión.</div>
+                </div>
+            </div></div>
             <!-- Imagen de la lista de candidatos -->
            <div class="image-container" style="text-align: center; margin-bottom: 3rem;">
     <img src="Lista_1.jpg" 
@@ -795,11 +810,6 @@
         👆 Haz clic en la imagen para ampliarla
     </p>
 </div>
-
-
-            <div id="team-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
-                <!-- Los miembros del equipo se agregarán aquí mediante JavaScript -->
-            </div>
         </div>
     </section>
 
@@ -959,47 +969,6 @@
             observer.observe(card);
         });
 
-        // EQUIPO DE TRABAJO - Una sola tarjeta con descripción general
-        const teamMembers = [
-            {
-                name: "Profesionales Comprometidos con el Cambio",
-                role: "Consejo Directivo 2025 - 2027",
-                description: "Un equipo sólido de 17 profesionales comprometidos con la transformación del Club Cultural Deportivo Lima. Cada miembro aporta experiencia, dedicación y pasión para trabajar juntos en beneficio de todos los socios, garantizando transparencia, modernización e inclusión en cada decisión.",
-                icon: "🤝",
-                photo: "cabecera.png"
-            }
-        ];
-
-        const teamGrid = document.getElementById('team-grid');
-        
-        teamMembers.forEach(member => {
-            const card = document.createElement('div');
-            card.className = 'team-member-card';
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(50px)';
-            card.style.transition = 'all 0.6s ease';
-            card.style.gridColumn = '1 / -1'; // Ocupa todo el ancho
-            card.style.maxWidth = '800px';
-            card.style.margin = '0 auto';
-            
-            const photoContent = member.photo 
-                ? `<img src="${member.photo}" alt="${member.name}">`
-                : `<span style="position: relative; z-index: 2;">${member.icon}</span>`;
-            
-            card.innerHTML = `
-                <div class="team-photo" style="height: 200px; font-size: 6rem;">
-                    ${photoContent}
-                </div>
-                <div class="team-info">
-                    <div class="team-name">${member.name}</div>
-                    <div class="team-role">${member.role}</div>
-                    <div class="team-description" style="text-align: center; font-size: 1rem; line-height: 1.8;">${member.description}</div>
-                </div>
-            `;
-            
-            teamGrid.appendChild(card);
-            observer.observe(card);
-        });
 
         // Funciones para el modal de imagen
         function openModal() {
