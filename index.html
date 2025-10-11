@@ -584,9 +584,52 @@
         max-width: 90%;
     }
 }
+
+
+
+/* --- Fondo fijo (site-bg) --- */
+.site-bg{
+  position: fixed;
+  inset: 0;
+  background: url('IMG_20251010_171914-Photoroom.png') no-repeat center center / cover;
+  background-attachment: fixed; /* fijado al viewport */
+  opacity: 0.12;         /* ajusta la visibilidad */
+  pointer-events: none;  /* no interfiere con clicks */
+  z-index: 0;
+}
+
+/* Contenido por encima del fondo */
+.page-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ajusta .hero para que deje ver el fondo debajo (semiprivado) */
+.hero {
+  /* cambia tu gradient opaco por uno semitransparente */
+  background: linear-gradient(135deg, rgba(13,79,139,0.86) 0%, rgba(26,107,184,0.86) 100%);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fallback para mobile (iOS no siempre acepta fixed) */
+@media (max-width: 1024px) {
+  .site-bg {
+    background-attachment: scroll; /* evita problemas en móviles */
+  }
+}
+
     </style>
 </head>
 <body>
+    <!-- capa de fondo fija -->
+  <div class="site-bg" aria-hidden="true"></div>
+
+  <!-- envuelve todo tu contenido en este wrapper -->
+  <div class="page-content">
     <div class="scroll-progress" id="scroll-progress"></div>
 
     <section class="hero">
@@ -982,17 +1025,19 @@
             observer.observe(card);
         });
 
-
-        // Funciones para el modal de imagen
-        function openModal() {
-            document.getElementById('imageModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('imageModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+ function openModal() {
+    const modal = document.getElementById('imageModal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+       
+  function closeModal() {
+    const modal = document.getElementById('imageModal');
+    if (!modal) return;
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
 
         // Cerrar modal con tecla ESC
         document.addEventListener('keydown', function(event) {
@@ -1000,19 +1045,13 @@
                 closeModal();
             }
         });
-
-        function openModal() {
-    document.getElementById("imageModal").style.display = "flex";
-}
-
-function closeModal() {
-    document.getElementById("imageModal").style.display = "none";
-}
-
+        
 // Cerrar si se hace clic fuera de la imagen
 document.getElementById("imageModal").addEventListener("click", function(e) {
     if (e.target === this) closeModal();
 });
     </script>
+
+     </div> <!-- .page-content -->
 </body>
 </html>
