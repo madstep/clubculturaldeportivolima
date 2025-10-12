@@ -368,6 +368,7 @@ body::before {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   transition: all 0.3s ease;
   border: 2px solid transparent;
+  color: #333;
 }
 
 .commitment-card:hover {
@@ -682,24 +683,37 @@ body::before {
 .site-bg {
   position: fixed;
   inset: 0;
-  background: url("/IMG_20251010_171914-Photoroom.png") no-repeat top center /
-    cover;
-  background-attachment: fixed; /* fijado al viewport */
-  opacity: 1.35; /* ajusta la visibilidad */
-  pointer-events: none; /* no interfiere con clicks */
+  background: url(/IMG_20251010_171914-Photoroom.png) no-repeat center / cover;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center top;
+  opacity: 1;
+  pointer-events: none;
   z-index: 0;
+  will-change: transform;
+  transition: opacity 0.3s;
 }
 
-/* Contenido por encima del fondo */
+.site-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.site-bg.hidden {
+  display: none;
+}
+
 .page-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  color: white;
   opacity: 0.95;
 }
 
-/* Ajusta .hero para que deje ver el fondo debajo (semiprivado) */
 .hero {
-  /* cambia tu gradient opaco por uno semitransparente */
   background: linear-gradient(
     135deg,
     rgba(13, 79, 139, 0.86) 0%,
@@ -746,10 +760,16 @@ body::before {
   text-transform: uppercase;
   opacity: 0.9;
 }
-/* Fallback para mobile (iOS no siempre acepta fixed) */
+
 @media (max-width: 1024px) {
   .site-bg {
-    background-attachment: scroll; /* evita problemas en móviles */
+    background-attachment: scroll;
+  }
+}
+@media (max-width: 768px) {
+  .site-bg {
+    background-attachment: scroll;
+    background-position: center top;
   }
 }
 
@@ -785,7 +805,7 @@ body::before {
 .whatsapp-text {
   margin-top: 10px;
   background-color: white;
-  color: #0D4F8B;
+  color: #0d4f8b;
   padding: 0.4rem 1rem;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -797,4 +817,101 @@ body::before {
 
 .whatsapp-text:hover {
   transform: scale(1.05);
+}
+
+/* --- Compatibilidad móvil --- */
+/* Algunos móviles ignoran background-attachment: fixed */
+@media (max-width: 768px) {
+  .site-bg {
+    background-attachment: scroll; /* evita parpadeos */
+    background-position: center top;
+  }
+}
+
+/* Botón para abrir imagen */
+.btn-show-image {
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.2s;
+}
+
+.btn-show-image:hover {
+  transform: scale(1.05);
+}
+
+.popup-overlay,
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+.popup-image,
+.modal-content {
+  position: relative;
+  max-width: 60%;
+  max-height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  animation: zoomIn 0.3s ease;
+}
+
+.popup-image img,
+.modal-content img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+.btn-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.2s;
+}
+
+.btn-close:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* --- Animaciones --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

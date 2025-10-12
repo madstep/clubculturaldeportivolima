@@ -6,6 +6,16 @@ import { Analytics } from "@vercel/analytics/next";
 
 export default function Page() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showImage, setShowImage] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleOpen = () => {
+    setShowPopup(true);
+  };
+
+  const handleClose = () => {
+    setShowPopup(false);
+  };
 
   useEffect(() => {
     // --- Script de Vercel Analytics ---
@@ -247,7 +257,10 @@ export default function Page() {
 
       <style>{`/* Pega aquí todo el CSS original tal cual */`}</style>
 
-      <div className="site-bg" aria-hidden="true"></div>
+      <div
+        className={`site-bg ${showPopup ? "hidden" : ""}`}
+        aria-hidden="true"
+      ></div>
 
       <div className="page-content">
         <div className="scroll-progress" id="scroll-progress"></div>
@@ -357,6 +370,7 @@ export default function Page() {
                 </text>
               </svg>
             </div>
+            {/* Botón para abrir el modal */}
 
             <h2
               style={{
@@ -364,6 +378,8 @@ export default function Page() {
                 marginBottom: "1rem",
                 fontWeight: 600,
               }}
+              className="btn-show-image"
+              onClick={handleOpen}
             >
               Juan Alberto Jara "Frejol"
             </h2>
@@ -757,7 +773,7 @@ export default function Page() {
                   {/* Imagen de la lista de candidatos */}
                   <div
                     className="image-container"
-                    style={{ textAlign: "center", marginBottom: "3rem" }}
+                    style={{ textAlign: "center", margin: "2rem" }}
                   >
                     <img
                       src="/Lista_1.jpg"
@@ -966,6 +982,37 @@ export default function Page() {
             </p>
           </div>
         </footer>
+
+        {/* Modal */}
+        {showPopup && (
+          <div className="popup-overlay" onClick={() => setShowPopup(false)}>
+            <span
+              style={{
+                position: "absolute",
+                top: "15px",
+                right: "25px",
+                color: "#fff",
+                fontSize: "40px",
+                fontWeight: "bold",
+                cursor: "pointer",
+                userSelect: "none",
+              }}
+              onClick={() => setShowPopup(false)}
+            >
+              &times;
+            </span>
+            <div
+              className="popup-image"
+              onClick={(e) => e.stopPropagation()} // evita cerrar al click dentro de la imagen
+            >
+              <img
+                src="/IMG_20251010_171914-Photoroom.png"
+                alt="Campaña"
+                onClick={(e) => e.stopPropagation()} // evita cerrar al hacer clic en la imagen
+              />
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
