@@ -27,6 +27,7 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [loadingDni, setLoadingDni] = useState(null);
   const [userHasLiked, setUserHasLiked] = useState(false);
+  const [data, setData] = useState(null);
   const handleOpen = () => {
     setShowPopup(true);
   };
@@ -415,7 +416,7 @@ export default function Page() {
     setLoadingDni(null);
   };
 
-  return (
+    return (
     <>
       <Analytics />
       {/*  <Head>
@@ -449,7 +450,7 @@ export default function Page() {
         className={`site-bg ${showPopup ? "hidden" : ""}`}
         aria-hidden="true"
       ></div>
-
+   
       <div className="page-content">
         <div className="scroll-progress" id="scroll-progress"></div>
 
