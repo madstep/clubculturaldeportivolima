@@ -3,12 +3,30 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Analytics } from "@vercel/analytics/next";
+import { db } from "@/lib/firebase";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  increment,
+  onSnapshot,
+  collection,
+  addDoc,
+} from "firebase/firestore";
+import votosData from "../votosDni.json"; // Ajusta la ruta según tu estructura
 
 export default function Page() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showImage, setShowImage] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-
+  const [visitas, setVisitas] = useState(0);
+  const [likes, setLikes] = useState(0);
+  const [liked, setLiked] = useState(false);
+  const [mensaje, setMensaje] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [loadingDni, setLoadingDni] = useState(null);
+  const [userHasLiked, setUserHasLiked] = useState(false);
   const handleOpen = () => {
     setShowPopup(true);
   };
@@ -16,6 +34,46 @@ export default function Page() {
   const handleClose = () => {
     setShowPopup(false);
   };
+
+  useEffect(() => {
+    const importarVotos = async () => {
+      setLoading(true);
+      try {
+        const votosRef = collection(db, "votos");
+
+        for (const persona of votosData) {
+          // Limpiar DNI para usarlo como ID
+          const docId = persona.dni
+            ? String(persona.dni).replace(/[^a-zA-Z0-9_-]/g, "")
+            : null;
+
+          const cleanPersona = {
+            item: Number(persona.item) || 0,
+            nombre: String(persona.nombre || ""),
+            cargo: String(persona.cargo || ""),
+            dni: String(persona.dni || ""),
+            codigo: String(persona.codigo || ""),
+            votos: Number(persona.votos) || 0,
+          };
+
+          if (docId && docId.length > 0) {
+            await setDoc(doc(votosRef, docId), cleanPersona);
+          } else {
+            await addDoc(votosRef, cleanPersona);
+          }
+        }
+
+        setMensaje("🎉 Importación completada!");
+      } catch (err) {
+        console.error("Error importando votos:", err.message);
+        setMensaje("❌ Error al importar votos");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    //importarVotos();
+  }, []);
 
   useEffect(() => {
     // --- Script de Vercel Analytics ---
@@ -226,6 +284,136 @@ export default function Page() {
       document.removeEventListener("keydown", handleKeydown);
     };
   }, []);
+
+  // 👥 Registrar visitas
+  useEffect(() => {
+    const registrarVisita = async () => {
+      const ref = doc(db, "contador", "visitas");
+      const snap = await getDoc(ref);
+      if (snap.exists()) {
+        await updateDoc(ref, { total: increment(1) });
+        setVisitas(snap.data().total + 1);
+      } else {
+        await setDoc(ref, { total: 1 });
+        setVisitas(1);
+      }
+    };
+    registrarVisita();
+  }, []);
+
+  useEffect(() => {
+    const ref = doc(db, "interacciones", "likes");
+
+    // Crear doc si no existe
+    getDoc(ref).then((snap) => {
+      if (!snap.exists()) {
+        setDoc(ref, { total: 0 });
+      }
+    });
+
+    // Escuchar en tiempo real
+    const unsub = onSnapshot(ref, (snap) => {
+      if (snap.exists()) {
+        setLikes(snap.data().total);
+      }
+    });
+
+    // Revisar si ya dio like
+    if (localStorage.getItem("liked") === "true") {
+      setLiked(true);
+    }
+
+    return () => unsub();
+  }, []);
+
+  const handleLike = async () => {
+    if (liked) return alert("Ya diste me gusta ❤️");
+
+    const ref = doc(db, "interacciones", "likes");
+
+    try {
+      await updateDoc(ref, { total: increment(1) });
+    } catch (err) {
+      // Si el doc no existe aún
+      await setDoc(ref, { total: 1 });
+    }
+
+    localStorage.setItem("liked", "true");
+    setLiked(true);
+    showConfetti();
+  };
+
+  const showConfetti = () => {
+    const colors = ["#C41E3A", "#FFD700", "#ffffff", "#25d366"];
+    const confettiCount = 35;
+
+    const button = document.getElementById("likeButton");
+    if (!button) return;
+
+    const buttonRect = button.getBoundingClientRect();
+    const centerX = buttonRect.left + buttonRect.width / 2;
+    const centerY = buttonRect.top + buttonRect.height / 2;
+
+    for (let i = 0; i < confettiCount; i++) {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.position = "fixed";
+      confetti.style.width = "10px";
+      confetti.style.height = "10px";
+      confetti.style.borderRadius = "50%";
+      confetti.style.pointerEvents = "none";
+      confetti.style.zIndex = "9999";
+      confetti.style.backgroundColor =
+        colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.left = centerX + "px";
+      confetti.style.top = centerY + "px";
+
+      document.body.appendChild(confetti);
+
+      const angle = (Math.PI * 2 * i) / confettiCount;
+      const velocity = 80 + Math.random() * 120;
+      const rotation = Math.random() * 360;
+
+      confetti.animate(
+        [
+          { transform: "translate(0, 0) rotate(0deg)", opacity: 1 },
+          {
+            transform: `translate(${Math.cos(angle) * velocity}px, ${
+              Math.sin(angle) * velocity
+            }px) rotate(${rotation}deg)`,
+            opacity: 0,
+          },
+        ],
+        {
+          duration: 1000 + Math.random() * 400,
+          easing: "cubic-bezier(0, .9, .57, 1)",
+        }
+      ).onfinish = () => confetti.remove();
+    }
+  };
+
+  const handleCVClick = async (dni, nombre) => {
+    setLoadingDni(dni);
+
+    // 1️⃣ Abrir PDF en popup (ajusta la ruta de tus PDFs)
+    const pdfUrl = `/pdfs/${nombre.replace(/\s/g, "_")}.pdf`;
+    window.open(pdfUrl, "_blank", "width=800,height=600");
+
+    try {
+      // 2️⃣ Incrementar contador de votos en Firebase
+      const ref = doc(db, "votos", dni);
+      const snap = await getDoc(ref);
+      if (snap.exists()) {
+        await updateDoc(ref, { votos: increment(1) });
+      } else {
+        await setDoc(ref, { votos: 1 }); // Si no existe, crear
+      }
+    } catch (err) {
+      console.error("Error al actualizar votos:", err.message);
+    }
+
+    setLoadingDni(null);
+  };
 
   return (
     <>
@@ -797,6 +985,74 @@ export default function Page() {
                       👆 Haz clic en la imagen para ampliarla
                     </p>
                   </div>
+
+                  <div style={{ padding: "2rem" }}>
+                    <h3
+                      style={{
+                        textAlign: "center",
+                        color: "#0D4F8B",
+                        fontSize: "1.5rem",
+                        margin: "2rem 0 1rem",
+                      }}
+                    >
+                      📋 Integrantes de la Lista 1
+                    </h3>
+                    <table
+                      className="candidatos-table"
+                      style={{ width: "100%", borderCollapse: "collapse" }}
+                    >
+                      <thead>
+                        <tr>
+                          <th className="col-item">Ítem</th>
+                          <th>Apellidos y Nombres</th>
+                          <th>Cargo</th>
+                          <th className="col-dni">DNI</th>
+                          <th className="col-codigo">Código</th>
+                          <th>CV</th>
+                        </tr>
+                      </thead>
+                      <tbody id="candidatosBody">
+                        {votosData.map((candidato) => (
+                          <tr key={candidato.dni}>
+                            <td
+                              className="col-item"
+                              style={{ fontWeight: 600 }}
+                            >
+                              {candidato.item}
+                            </td>
+                            <td style={{ fontWeight: 500 }}>
+                              {candidato.nombre}
+                            </td>
+                            <td>
+                              <span className="cargo-badge">
+                                {candidato.cargo}
+                              </span>
+                            </td>
+                            <td className="col-dni">{candidato.dni}</td>
+                            <td
+                              className="col-codigo"
+                              style={{ color: "#C41E3A", fontWeight: 600 }}
+                            >
+                              {candidato.codigo}
+                            </td>
+                            <td>
+                              <button
+                                className="cv-button"
+                                onClick={() =>
+                                  handleCVClick(candidato.dni, candidato.nombre)
+                                }
+                                disabled={loadingDni === candidato.dni}
+                              >
+                                {loadingDni === candidato.dni
+                                  ? "Contando..."
+                                  : "Ver CV"}
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -913,7 +1169,7 @@ export default function Page() {
             <div className="contact-info">
               <div>
                 <h4>📱 Juan Alberto Jara "Frejol" te escucha</h4>
-                <p>
+                <p className="likes-note">
                   Escanea el código QR para unirte a nuestro grupo de WhatsApp
                 </p>
 
@@ -953,22 +1209,72 @@ export default function Page() {
                         color: "#0D4F8B",
                         fontWeight: "bold",
                         marginTop: "0.5rem",
+                        animation: "pulse 2s infinite",
+                        lineHeight: 1,
+                        textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+                        transition: "all 0.3s ease",
                       }}
                     >
-                      👆 Únete al grupo
+                      👆 Únete al cambio
                     </p>
                   </div>
                 </a>
               </div>
+              <div className="container">
+                <h4>👍 ¿Te gusta nuestra propuesta?</h4>
+                <p className="likes-note">
+                  Tu apoyo nos motiva a seguir trabajando por el cambio que
+                  nuestro club merece.
+                </p>
+                <button
+                  id="likeButton"
+                  className={`like-button ${liked ? "liked" : ""}`}
+                  onClick={handleLike}
+                  disabled={liked}
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="red"
+                    style={{ marginRight: "8px" }}
+                  >
+                    <path d="M7.5 4.5C9.25 4.5 10.75 5.75 12 7.5C13.25 5.75 14.75 4.5 16.5 4.5C19.54 4.5 22 6.96 22 10C22 15 16.5 19 12 21.5C7.5 19 2 15 2 10C2 6.96 4.46 4.5 7.5 4.5Z" />
+                  </svg>
+                  <span id="buttonText">
+                    {" "}
+                    {liked ? "¡Gracias por tu apoyo!" : "Me gusta la propuesta"}
+                  </span>
+                </button>
 
-              <div>
-                <h4>🗓️ Cronograma</h4>
-                <p>Implementación por fases con transparencia total.</p>
+                <p className="likes-note">
+                  💡 Cada voto cuenta para hacer realidad esta transformación
+                </p>
               </div>
-
               <div>
-                <h4>💡 Propuestas</h4>
-                <p>Siempre abierto a nuevas ideas de nuestros socios.</p>
+                <h4>📊 Estadísticas en Tiempo Real</h4>
+                <p className="likes-note">🤝 Construyendo Juntos el Cambio</p>
+                <div className="likes-counter">
+                  <div className="counter-box">
+                    <span className="counter-number" id="likesCount">
+                      {likes}
+                    </span>
+                    <span className="counter-label">
+                      socios apoyan el cambio.
+                    </span>
+                  </div>
+                </div>
+                <div className="likes-counter">
+                  <div className="counter-box">
+                    <span className="counter-number" id="likesCountx">
+                      {visitas}
+                    </span>
+                    <span className="counter-label">visitas registradas.</span>
+                  </div>
+                </div>
+                <p className="likes-note">
+                  💡 Gracias por tomarte el tiempo de conocer nuestra propuesta
+                </p>
               </div>
             </div>
 

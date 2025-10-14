@@ -1,0 +1,19 @@
+[
+  { "item": 1, "nombre": "Juan Alberto Jara Arias", "cargo": "Presidente", "dni": "10329922", "codigo": "027323", "votos": 0 },
+  { "item": 2, "nombre": "Fredy Robinson Chilla Cuchillo", "cargo": "Vicepresidente", "dni": "07039949", "codigo": "000157", "votos": 0 },
+  { "item": 3, "nombre": "Carlos Alberto Obregón Guerra", "cargo": "Secretario", "dni": "42849073", "codigo": "028838", "votos": 0 },
+  { "item": 4, "nombre": "Lorena Liseth Suarez Macedo", "cargo": "Pro Secretaria", "dni": "41846499", "codigo": "028437", "votos": 0 },
+  { "item": 5, "nombre": "Yovana Yanyna Manzanares Chavez", "cargo": "Tesorero", "dni": "09377518", "codigo": "028740", "votos": 0 },
+  { "item": 6, "nombre": "Luciano David Bernahola Rosales", "cargo": "Pro Tesorero", "dni": "06064235", "codigo": "028756", "votos": 0 },
+  { "item": 7, "nombre": "Eduardo Daniel Benavente Rodríguez", "cargo": "Vocal", "dni": "09679577", "codigo": "029231", "votos": 0 },
+  { "item": 8, "nombre": "Paul Ulises Cornejo Zabalaga", "cargo": "Vocal", "dni": "10215597", "codigo": "029172", "votos": 0 },
+  { "item": 9, "nombre": "Luis Bernardo Aliaga Santana", "cargo": "Vocal", "dni": "08000133", "codigo": "027212", "votos": 0 },
+  { "item": 10, "nombre": "Renzo Alberto Quispe Chavez", "cargo": "Vocal", "dni": "70447782", "codigo": "028188", "votos": 0 },
+  { "item": 11, "nombre": "Ángel Alberto Berrocal Torre", "cargo": "Vocal", "dni": "40710233", "codigo": "029161", "votos": 0 },
+  { "item": 12, "nombre": "Manuel Isidro Quispe Leo", "cargo": "Vocal", "dni": "09379725", "codigo": "028270", "votos": 0 },
+  { "item": 13, "nombre": "Abner Grandez Mego", "cargo": "Accesitario", "dni": "42647563", "codigo": "028504", "votos": 0 },
+  { "item": 14, "nombre": "Carlos Fernando Velásquez Herencia", "cargo": "Accesitario", "dni": "09834523", "codigo": "028720", "votos": 0 },
+  { "item": 15, "nombre": "Josue Edgardo Perez Zurita", "cargo": "Accesitario", "dni": "70842491", "codigo": "028608", "votos": 0 },
+  { "item": 16, "nombre": "Ebert Wilder Izquierdo Saavedra", "cargo": "Personero", "dni": "09694476", "codigo": "029311", "votos": 0 },
+  { "item": 17, "nombre": "Juan Carlos Soto Castro", "cargo": "Personero", "dni": "07519730", "codigo": "27483", "votos": 0 }
+]

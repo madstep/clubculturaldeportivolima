@@ -709,7 +709,7 @@ body::before {
 .page-content {
   position: relative;
   z-index: 2;
-  color: white;
+  /*  color: white; */
   opacity: 0.95;
 }
 
@@ -858,9 +858,9 @@ body::before {
 
 .popup-image,
 .modal-content {
-  position: relative;
-  max-width: 60%;
-  max-height: 100%;
+  position: fixed;
+ /*  max-width: 60%; */
+  /* max-height: 100%; */
   border-radius: 10px;
   overflow: hidden;
   animation: zoomIn 0.3s ease;
@@ -868,8 +868,8 @@ body::before {
 
 .popup-image img,
 .modal-content img {
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 700px;
   display: block;
   border-radius: 10px;
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
@@ -913,5 +913,286 @@ body::before {
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+/* Tabla de candidatos */
+.candidatos-table {
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.candidatos-table thead {
+  background: linear-gradient(135deg, #0d4f8b 0%, #1a6bb8 100%);
+  color: white;
+}
+
+.candidatos-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.candidatos-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 0.9rem;
+}
+
+.candidatos-table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.candidatos-table tbody tr:hover {
+  background-color: rgba(13, 79, 139, 0.05);
+  transform: scale(1.01);
+}
+
+.candidatos-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.cv-button {
+  background: linear-gradient(45deg, #c41e3a, #e02e4a);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cv-button:hover {
+  background: linear-gradient(45deg, #e02e4a, #c41e3a);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(196, 30, 58, 0.3);
+}
+
+.cv-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.cargo-badge {
+  background: rgba(13, 79, 139, 0.1);
+  color: #0d4f8b;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .candidatos-table {
+    font-size: 0.8rem;
+  }
+
+  .candidatos-table th,
+  .candidatos-table td {
+    padding: 0.5rem;
+  }
+
+  .cv-button {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-item,
+  .col-dni,
+  .col-codigo {
+    display: none;
+  }
+}
+
+/* Estilos para el formulario de votación Likes*/
+
+.likes-section {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.likes-card {
+  max-width: 700px;
+  margin: 0 auto;
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(13, 79, 139, 0.15);
+  text-align: center;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.likes-card:hover {
+  border-color: #0d4f8b;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 50px rgba(13, 79, 139, 0.25);
+}
+
+.likes-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #c41e3a, #e02e4a);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 15px rgba(196, 30, 58, 0.4);
+  animation: pulse 2s infinite;
+}
+
+.likes-card h2 {
+  color: #0d4f8b;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.likes-description {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.like-button {
+  background: linear-gradient(45deg, #25d366, #128c7e);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  min-width: 100px;
+  margin-top: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.like-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
+  background: linear-gradient(45deg, #128c7e, #25d366);
+}
+
+.like-button:disabled {
+  background: linear-gradient(45deg, #0d4f8b, #1a6bb8);
+  cursor: not-allowed;
+  opacity: 0.9;
+}
+
+.like-button svg {
+  transition: transform 0.3s ease;
+}
+
+.like-button:hover:not(:disabled) svg {
+  transform: scale(1.2);
+}
+
+.likes-counter {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.counter-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.counter-number {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ffd700;
+  line-height: 1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.counter-label {
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+.likes-note {
+  color: #ffffff;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+@keyframes likeSuccess {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.like-button.success {
+  animation: likeSuccess 0.5s ease;
+}
+
+@media (max-width: 768px) {
+  .likes-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .likes-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .likes-description {
+    font-size: 1rem;
+  }
+
+  .like-button {
+    min-width: auto;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .counter-number {
+    font-size: 2.5rem;
+  }
+
+  .counter-label {
+    font-size: 0.85rem;
   }
 }
