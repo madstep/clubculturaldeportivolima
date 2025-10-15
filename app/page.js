@@ -33,7 +33,6 @@ export default function Page() {
   const [countVisits, setCountVisits] = useState(0);
   const [countLikes, setCountLikes] = useState(0);
 
-
   const handleOpen = () => {
     setShowPopup(true);
   };
@@ -453,7 +452,7 @@ export default function Page() {
     return () => clearInterval(timer);
   }, [visitas]);
 
-    useEffect(() => {
+  useEffect(() => {
     if (likes == null) return; // Asegura que no sea undefined o null
 
     let current = 0;
@@ -1437,7 +1436,7 @@ export default function Page() {
 
               {/* PDF */}
               <iframe
-                src={`/pdfs/${selectedCV.pdfUrl}`}
+                src={`https://docs.google.com/gview?embedded=true&url=${window.location.origin}/pdfs/${selectedCV.pdfUrl}`}
                 className="modal-iframe"
                 title={`CV - ${selectedCV.nombre}`}
               ></iframe>
