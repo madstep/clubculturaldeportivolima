@@ -987,7 +987,7 @@ export default function Page() {
                     </p>
                   </div>
 
-                  <div style={{ padding: "2rem" }}>
+                  <div >
                     <h3
                       style={{
                         textAlign: "center",
