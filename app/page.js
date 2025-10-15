@@ -291,20 +291,34 @@ export default function Page() {
     };
   }, []);
 
-  // 👥 Registrar visitas
+  // 👥 Registrar y escuchar visitas en tiempo real
   useEffect(() => {
-    const registrarVisita = async () => {
-      const ref = doc(db, "contador", "visitas");
+    const ref = doc(db, "contador", "visitas");
+
+    const registrarYEscucharVisitas = async () => {
       const snap = await getDoc(ref);
-      if (snap.exists()) {
-        await updateDoc(ref, { total: increment(1) });
-        setVisitas(snap.data().total + 1);
-      } else {
+
+      // Si el doc no existe, créalo
+      if (!snap.exists()) {
         await setDoc(ref, { total: 1 });
         setVisitas(1);
+      } else {
+        // Incrementa en 1 al ingresar
+        await updateDoc(ref, { total: increment(1) });
       }
+
+      // 🔁 Escucha en tiempo real
+      const unsub = onSnapshot(ref, (snapshot) => {
+        if (snapshot.exists()) {
+          setVisitas(snapshot.data().total);
+        }
+      });
+
+      // Limpieza del listener al desmontar el componente
+      return () => unsub();
     };
-    registrarVisita();
+
+    registrarYEscucharVisitas();
   }, []);
 
   useEffect(() => {
@@ -626,15 +640,40 @@ export default function Page() {
             >
               Juan Alberto Jara "Frejol"
             </h2>
-            <p
+            <div className="candidate-row">
+              <div>
+                <div className="periodo-info">📅 Período de Gestión</div>
+                <div
+                  style={{
+                    fontSize: "1.8rem",
+                    fontWeight: 900,
+                    color: "#FFD700",
+                    marginTop: "0.5rem",
+                  }}
+                >
+                  2025 - 2027
+                </div>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <div className="lista-badge">🏆 LISTA 1</div>
+                <p
+                  style={{
+                    color: "rgba(255,255,255,0.8)",
+                    fontSize: "0.9rem",
+                    marginTop: "0.8rem",
+                  }}
+                >
+                  Candidato a Presidente
+                </p>
+              </div>
+            </div>
+            <div
               style={{
-                fontSize: "1.5rem",
-                fontWeight: 600,
-                marginBottom: "1rem",
+                borderTop: "2px solid rgba(255,255,255,0.2)",
+                paddingTop: "1.5rem",
+                marginTop: "1.5rem",
               }}
-            >
-              2025 - 2027
-            </p>
+            ></div>
             <p>
               Nuestro Club Cultural Deportivo Lima merece una dirección
               visionaria, transparente y comprometida con el bienestar de todos
@@ -653,7 +692,16 @@ export default function Page() {
         {/* Contador */}
         <div className="countdown-section">
           <h3 style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>
-            ⏰ Faltan para las Elecciones
+            <span
+              className="animation-element"
+              style={{
+                animation: "tilt-shaking 0.25s linear infinite",
+                display: "inline-block",
+              }}
+            >
+              ⏰
+            </span>
+            Faltan para las Elecciones
           </h3>
           <div className="countdown-container" id="countdown">
             <div className="countdown-item">
@@ -686,6 +734,8 @@ export default function Page() {
               fontSize: "1.5rem",
               marginBottom: "0.5rem",
               marginTop: "10px",
+              padding: "0.4rem 1rem",
+              animation: "pulse 2s infinite",
             }}
           >
             Unete al cambio
