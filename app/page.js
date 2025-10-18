@@ -487,18 +487,24 @@ export default function Page() {
   }, [likes]);
 
   const toggleDiagnostic = (num) => {
-    setActiveCard(activeCard === num ? null : num);
-    const content = document.getElementById(`diag-content-${num}`);
-    if (content) {
-      content.classList.toggle("active");
-    }
+    const isActive = activeCard === num;
+    setActiveCard(isActive ? null : num);
 
-    // Cierra las demás
-    for (let i = 1; i <= 5; i++) {
-      if (i !== num) {
-        const other = document.getElementById(`diag-content-${i}`);
-        if (other) other.classList.remove("active");
-      }
+    // Cierra todo lo demás
+    document
+      .querySelectorAll(".expand-content")
+      .forEach((c) => c.classList.remove("active"));
+    document
+      .querySelectorAll(".expand-icon-diagnostic")
+      .forEach((i) => i.classList.remove("rotated"));
+
+    // Si no estaba activo, abre este
+    if (!isActive) {
+      const content = document.getElementById(`diag-content-${num}`);
+      const icon = document.getElementById(`icon-diagnostic-${num}`);
+
+      if (content) content.classList.add("active");
+      if (icon) icon.classList.add("rotated");
     }
   };
 
@@ -777,7 +783,19 @@ export default function Page() {
                 }`}
                 onClick={() => toggleDiagnostic(1)}
               >
-                <h4>🏗️ Infraestructura y Mantenimiento</h4>
+                <div className="diagnostic-header">
+                  <div className="diagnostic-title">
+                    <h4>🏗️ Infraestructura y Mantenimiento</h4>
+                  </div>
+                  <div
+                    className={`expand-icon-diagnostic ${
+                      activeCard === 1 ? "rotated" : ""
+                    }`}
+                    id="icon-diagnostic-1"
+                  >
+                    <span className="icon-inner">▼</span>
+                  </div>
+                </div>
                 <p>
                   Las áreas deportivas, piscinas y zonas comunes presentan
                   signos de desgaste y falta de mantenimiento. Se observan{" "}
@@ -814,7 +832,17 @@ export default function Page() {
                 }`}
                 onClick={() => toggleDiagnostic(2)}
               >
-                <h4>🚨 Seguridad y Salud</h4>
+                <div className="diagnostic-header">
+                  <div className="diagnostic-title">
+                    <h4>🚨 Seguridad y Salud</h4>
+                  </div>
+                  <div
+                    className="expand-icon-diagnostic"
+                    id="icon-diagnostic-2"
+                  >
+                    <span className="icon-inner">▼</span>
+                  </div>
+                </div>
                 <p>
                   Deficiencias en sistemas de vigilancia y respuesta ante
                   emergencias. No hay <strong>cámaras activas</strong>, ni{" "}
@@ -852,7 +880,17 @@ export default function Page() {
                 }`}
                 onClick={() => toggleDiagnostic(3)}
               >
-                <h4>💬 Gestión, Transparencia y Comunicación</h4>
+                <div className="diagnostic-header">
+                  <div className="diagnostic-title">
+                    <h4>💬 Gestión, Transparencia y Comunicación</h4>
+                  </div>
+                  <div
+                    className="expand-icon-diagnostic"
+                    id="icon-diagnostic-3"
+                  >
+                   <span className="icon-inner">▼</span>
+                  </div>
+                </div>
                 <p>
                   Falta de rendición de cuentas y comunicación institucional.
                   Los socios <strong>no disponen de canales digitales</strong>{" "}
@@ -888,7 +926,17 @@ export default function Page() {
                 }`}
                 onClick={() => toggleDiagnostic(4)}
               >
-                <h4>⚽ Áreas Deportivas y Servicios</h4>
+                <div className="diagnostic-header">
+                  <div className="diagnostic-title">
+                    <h4>⚽ Áreas Deportivas y Servicios</h4>
+                  </div>
+                  <div
+                    className="expand-icon-diagnostic"
+                    id="icon-diagnostic-4"
+                  >
+                    <span className="icon-inner">▼</span>
+                  </div>
+                </div>
                 <p>
                   Las canchas, el gimnasio y el sauna presentan{" "}
                   <strong>falta de mantenimiento y modernización</strong>. No
@@ -923,7 +971,17 @@ export default function Page() {
                 }`}
                 onClick={() => toggleDiagnostic(5)}
               >
-                <h4>🌱 Sostenibilidad y Comunidad</h4>
+                <div className="diagnostic-header">
+                  <div className="diagnostic-title">
+                    <h4>🌱 Sostenibilidad y Comunidad</h4>
+                  </div>
+                  <div
+                    className="expand-icon-diagnostic"
+                    id="icon-diagnostic-5"
+                  >
+                   <span className="icon-inner">▼</span>
+                  </div>
+                </div>
                 <p>
                   No existe un plan ambiental ni política de convivencia
                   familiar. Se requiere{" "}
