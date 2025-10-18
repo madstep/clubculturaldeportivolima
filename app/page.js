@@ -32,7 +32,8 @@ export default function Page() {
   const [selectedCV, setSelectedCV] = useState(null);
   const [countVisits, setCountVisits] = useState(0);
   const [countLikes, setCountLikes] = useState(0);
-
+  const [activeDiag, setActiveDiag] = useState(null);
+  const [activeCard, setActiveCard] = useState(null);
   const handleOpen = () => {
     setShowPopup(true);
   };
@@ -484,6 +485,23 @@ export default function Page() {
 
     return () => clearInterval(timer);
   }, [likes]);
+
+  const toggleDiagnostic = (num) => {
+    setActiveCard(activeCard === num ? null : num);
+    const content = document.getElementById(`diag-content-${num}`);
+    if (content) {
+      content.classList.toggle("active");
+    }
+
+    // Cierra las demás
+    for (let i = 1; i <= 5; i++) {
+      if (i !== num) {
+        const other = document.getElementById(`diag-content-${i}`);
+        if (other) other.classList.remove("active");
+      }
+    }
+  };
+
   return (
     <>
       <Analytics />
@@ -742,220 +760,636 @@ export default function Page() {
           </h3>
         </div>
         <div className="section-divider"></div>
+        <section id="diagnostico" className="diagnostic-section timeline">
+          <div className="container">
+            <h2>🔍 Diagnóstico Actual del Club</h2>
+            <p className="intro-text">
+              El Club Deportivo Cultural Lima atraviesa una etapa de desgaste
+              general, con deficiencias visibles en mantenimiento, seguridad y
+              comunicación interna. Este diagnóstico identifica las principales
+              necesidades que deben atenderse para recuperar la operatividad,
+              confianza y sostenibilidad institucional.
+            </p>
+            <div className="diagnostic-grid">
+              <div
+                className={`diagnostic-card ${
+                  activeCard === 1 ? "active" : ""
+                }`}
+                onClick={() => toggleDiagnostic(1)}
+              >
+                <h4>🏗️ Infraestructura y Mantenimiento</h4>
+                <p>
+                  Las áreas deportivas, piscinas y zonas comunes presentan
+                  signos de desgaste y falta de mantenimiento. Se observan{" "}
+                  <strong>cables eléctricos expuestos</strong>,{" "}
+                  <strong>postes deteriorados</strong> y una{" "}
+                  <strong>iluminación insuficiente</strong> en varias zonas del
+                  club.
+                </p>
+                <div className="expand-content" id="diag-content-1">
+                  <ul>
+                    <li>
+                      El sistema de calderas no opera con eficiencia, afectando
+                      la climatización de la piscina principal.
+                    </li>
+                    <li>
+                      Baños, duchas y camerinos muestran falta de limpieza,
+                      filtraciones y deterioro estructural.
+                    </li>
+                    <li>
+                      Falta un programa regular de mantenimiento general y
+                      limpieza continua.
+                    </li>
+                    <li>
+                      Ausencia de señalización clara en áreas deportivas, zonas
+                      de parrillas, estacionamientos y restaurantes.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                className={`diagnostic-card ${
+                  activeCard === 2 ? "active" : ""
+                }`}
+                onClick={() => toggleDiagnostic(2)}
+              >
+                <h4>🚨 Seguridad y Salud</h4>
+                <p>
+                  Deficiencias en sistemas de vigilancia y respuesta ante
+                  emergencias. No hay <strong>cámaras activas</strong>, ni{" "}
+                  <strong>control digital de accesos</strong>. Faltan{" "}
+                  <strong>protocolos médicos</strong> y{" "}
+                  <strong>desfibriladores</strong> en áreas deportivas.
+                </p>
+                <div className="expand-content" id="diag-content-2">
+                  <ul>
+                    <li>
+                      Personal de seguridad limitado en zonas deportivas y
+                      recreativas.
+                    </li>
+                    <li>
+                      Carencia de extintores operativos y luces de emergencia.
+                    </li>
+                    <li>
+                      Ausencia de ambulancia para atención en eventos o
+                      accidentes deportivos.
+                    </li>
+                    <li>
+                      Ausencia de microseguros o cobertura médica básica para
+                      socios.
+                    </li>
+                    <li>
+                      Requiere iluminación LED y señalización de evacuación.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                className={`diagnostic-card ${
+                  activeCard === 3 ? "active" : ""
+                }`}
+                onClick={() => toggleDiagnostic(3)}
+              >
+                <h4>💬 Gestión, Transparencia y Comunicación</h4>
+                <p>
+                  Falta de rendición de cuentas y comunicación institucional.
+                  Los socios <strong>no disponen de canales digitales</strong>{" "}
+                  para consultas, pagos o reclamos, y la información sobre la
+                  gestión es limitada.
+                </p>
+                <div className="expand-content" id="diag-content-3">
+                  <ul>
+                    <li>
+                      La web actual funciona como una landing page, sin acceso a
+                      una
+                      <strong> intranet de socios</strong> ni sistema de
+                      autogestión.
+                    </li>
+                    <li>
+                      No existe una <strong>pasarela de pagos integrada</strong>{" "}
+                      ni seguimiento de cuotas, servicios o consumos.
+                    </li>
+                    <li>
+                      Ausencia de comunicación directa entre socios y directiva.
+                    </li>
+                    <li>
+                      Falta de transparencia en la publicación periódica de
+                      informes financieros y decisiones administrativas.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                className={`diagnostic-card ${
+                  activeCard === 4 ? "active" : ""
+                }`}
+                onClick={() => toggleDiagnostic(4)}
+              >
+                <h4>⚽ Áreas Deportivas y Servicios</h4>
+                <p>
+                  Las canchas, el gimnasio y el sauna presentan{" "}
+                  <strong>falta de mantenimiento y modernización</strong>. No
+                  existe un plan de apoyo a deportistas destacados ni convenios
+                  con auspiciadores.
+                </p>
+                <div className="expand-content" id="diag-content-4">
+                  <ul>
+                    <li>
+                      Iluminación deficiente y drenaje ineficiente en campos
+                      deportivos.
+                    </li>
+                    <li>
+                      Gimnasio con máquinas antiguas y sauna operando
+                      parcialmente.
+                    </li>
+                    <li>
+                      Falta de uniformidad y control en concesionarios y
+                      parrillas.
+                    </li>
+                    <li>
+                      Carencia de apoyo institucional a jóvenes deportistas de
+                      alto rendimiento del club.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                className={`diagnostic-card ${
+                  activeCard === 5 ? "active" : ""
+                }`}
+                onClick={() => toggleDiagnostic(5)}
+              >
+                <h4>🌱 Sostenibilidad y Comunidad</h4>
+                <p>
+                  No existe un plan ambiental ni política de convivencia
+                  familiar. Se requiere{" "}
+                  <strong>
+                    gestión sostenible, reciclaje y control responsable
+                  </strong>{" "}
+                  del consumo en áreas comunes.
+                </p>
+                <div className="expand-content" id="diag-content-5">
+                  <ul>
+                    <li>Carencia de iluminación LED y energía renovable.</li>
+                    <li>
+                      Zonas verdes descuidadas y sin mantenimiento ecológico.
+                    </li>
+                    <li>
+                      Débil sentido de comunidad y orden en espacios comunes.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div className="section-divider"></div>
         <section id="propuesta" className="timeline">
           <div className="container">
             <h2>📋 Plan de Trabajo Integral - Lista 1</h2>
+            <div className="phases-container">
+              {/* FASE 1 */}
+              <div className="phase-card" onClick={() => togglePhase(1)}>
+                <div className="phase-header">
+                  <div className="phase-number">1</div>
+                  <div className="phase-title">
+                    <h3>Saneamiento Inicial</h3>
+                    <p>Poner la casa en orden</p>
+                  </div>
+                  <div className="phase-meta">
+                    <div className="phase-duration">4 - 6 meses</div>
+                    <div className="expand-icon" id="icon-1">
+                      ▼
+                    </div>
+                  </div>
+                </div>
+                <div className="phase-content" id="content-1">
+                  <ul>
+                    <li>
+                      <strong>📊 Auditoría integral:</strong> Evaluación
+                      financiera, legal y administrativa para garantizar{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        transparencia total
+                      </strong>{" "}
+                      desde el inicio de la gestión.
+                    </li>
 
-            <div className="phase-card" onClick={() => togglePhase(1)}>
-              <div className="phase-header">
-                <div className="phase-number">1</div>
-                <div className="phase-title">
-                  <h3>Saneamiento Inicial</h3>
-                  <p>Poner la casa en orden</p>
-                </div>
-                <div className="phase-duration">Primeros 4-6 meses</div>
-                <div className="expand-icon" id="icon-1">
-                  ▼
-                </div>
-              </div>
-              <div className="phase-content" id="content-1">
-                <ul>
-                  <li>
-                    <strong>Auditoría completa:</strong> Financiera y legal para
-                    total transparencia
-                  </li>
-                  <li>
-                    <strong>Cierre de procesos:</strong> Resolver pendientes
-                    legales
-                  </li>
-                  <li>
-                    <strong>Reparaciones urgentes:</strong> Baños, duchas,
-                    piscina y seguridad
-                  </li>
-                  <li>
-                    <strong>Limpieza permanente:</strong> Empresa especializada
-                    y mantenimiento preventivo
-                  </li>
-                </ul>
-                <p>
-                  <strong>Resultado:</strong> Club operativo, seguro y con
-                  cuentas claras desde el primer semestre.
-                </p>
-              </div>
-            </div>
+                    <li>
+                      <strong>📁 Regularización institucional:</strong> Cierre
+                      de procesos pendientes y{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        ordenamiento documental
+                      </strong>{" "}
+                      para restablecer la seguridad jurídica del club.
+                    </li>
 
-            <div className="phase-card" onClick={() => togglePhase(2)}>
-              <div className="phase-header">
-                <div className="phase-number">2</div>
-                <div className="phase-title">
-                  <h3>Modernización Deportiva</h3>
-                  <p>Elevando el nivel deportivo</p>
-                </div>
-                <div className="phase-duration">Meses 7-18</div>
-                <div className="expand-icon" id="icon-2">
-                  ▼
-                </div>
-              </div>
-              <div className="phase-content" id="content-2">
-                <ul>
-                  <li>
-                    <strong>Gimnasio renovado:</strong> Maquinaria moderna y
-                    entrenadores certificados
-                  </li>
-                  <li>
-                    <strong>Piscina temperada:</strong> Optimización de sistemas
-                    existentes
-                  </li>
-                  <li>
-                    <strong>Canchas renovadas:</strong> LED, drenaje y graderías
-                    accesibles
-                  </li>
-                  <li>
-                    <strong>Nueva Pista de atletismo:</strong> Disciplinas como:
-                    Carreras, Saltos, Lanzamientos
-                  </li>
-                  <li>
-                    <strong>Nuevos espacios:</strong> Salón multiuso y coworking
-                  </li>
-                  <li>
-                    <strong>Ingresos adicionales:</strong> Membresías para no
-                    socios y alianzas
-                  </li>
-                </ul>
-                <p>
-                  <strong>Resultado:</strong> Instalaciones deportivas de primer
-                  nivel que generen ingresos propios.
-                </p>
-              </div>
-            </div>
+                    <li>
+                      <strong>🛠️ Rehabilitación prioritaria:</strong> Reparación
+                      inmediata de baños, duchas, piscinas y{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        mejoras en seguridad
+                      </strong>{" "}
+                      e iluminación general.
+                    </li>
 
-            <div className="phase-card" onClick={() => togglePhase(3)}>
-              <div className="phase-header">
-                <div className="phase-number">3</div>
-                <div className="phase-title">
-                  <h3>Inclusión y Servicios Sociales</h3>
-                  <p>Un club para toda la familia</p>
-                </div>
-                <div className="phase-duration">Meses 19-30</div>
-                <div className="expand-icon" id="icon-3">
-                  ▼
+                    <li>
+                      <strong>🧹 Limpieza y Mantenimiento permanente:</strong>{" "}
+                      Contratación de una empresa especializada y puesta en
+                      marcha de un{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        plan preventivo continuo
+                      </strong>{" "}
+                      para todas las áreas.
+                    </li>
+                  </ul>
+                  <div className="phase-result">
+                    <strong>✅ Resultado:</strong> Un club ordenado, operativo y
+                    transparente, listo para recibir a los socios en condiciones
+                    óptimas desde el primer semestre.
+                  </div>
+                  <div className="progress-bar">
+                    <div className="progress-fill"></div>
+                  </div>
                 </div>
               </div>
-              <div className="phase-content" id="content-3">
-                <ul>
-                  <li>
-                    <strong>Centro para adultos mayores:</strong> Atención
-                    médica y actividades
-                  </li>
-                  <li>
-                    <strong>Accesibilidad universal:</strong> Rampas, braille,
-                    vestuarios adaptados
-                  </li>
-                  <li>
-                    <strong>Servicios de salud:</strong> Terapia física y
-                    campañas preventivas
-                  </li>
-                  <li>
-                    <strong>Espacios familiares:</strong> Área infantil y salón
-                    de eventos
-                  </li>
-                  <li>
-                    <strong>Nuevos espacios de parrilla:</strong> Nuevas Áreas
-                    de parrillas y Camping
-                  </li>
-                  <li>
-                    <strong>Convenios:</strong> Con aseguradoras y
-                    municipalidades
-                  </li>
-                </ul>
-                <p>
-                  <strong>Resultado:</strong> Club inclusivo con servicios de
-                  salud y programas sociales.
-                </p>
+              {/* FASE 2 */}
+              <div className="phase-card" onClick={() => togglePhase(2)}>
+                <div className="phase-header">
+                  <div className="phase-number">2</div>
+                  <div className="phase-title">
+                    <h3>Modernización Deportiva</h3>
+                    <p>Elevando el nivel deportivo</p>
+                  </div>
+                  <div className="phase-meta">
+                    <div className="phase-duration">7 - 18 meses</div>
+                    <div className="expand-icon" id="icon-2">
+                      ▼
+                    </div>
+                  </div>
+                </div>
+                <div className="phase-content" id="content-2">
+                  <ul>
+                    <li>
+                      <strong>🎾 Tenis:</strong> Renovación selectiva de pistas
+                      para ofrecer{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        variedad de superficies
+                      </strong>{" "}
+                      (sintéticas y tradicionales), mejora del sistema de
+                      iluminación LED y{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        nuevas áreas de pádel
+                      </strong>{" "}
+                      para competencia y recreación.
+                    </li>
+                    <li>
+                      <strong>⚽ Fútbol:</strong>{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        Mejoras en las canchas 2 y 3
+                      </strong>
+                      , nivelación, drenaje, iluminación nocturna y{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        nueva cancha sintética
+                      </strong>{" "}
+                      para uso intensivo y torneos; además,{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        camerinos modernos en cancha 1
+                      </strong>
+                      .
+                    </li>
+                    <li>
+                      <strong>🏓 Frontón:</strong> Reforzamiento estructural de
+                      paredes,{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        nuevos camerinos
+                      </strong>
+                      , instalación de{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        mallas especializadas
+                      </strong>{" "}
+                      y divisiones adecuadas para seguridad y mejor visibilidad;
+                      además,{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        techado retráctil parcial
+                      </strong>{" "}
+                      para uso todo el año.
+                    </li>
+                    <li>
+                      <strong>🏀 Baloncesto y 🏐 Vóley:</strong> Renovación de
+                      pisos, señalización e iluminación profesional para torneos
+                      y entrenamientos.
+                    </li>
+                    <li>
+                      <strong>🏊 Natación:</strong> Recuperación de las cinco
+                      piscinas, climatización solar y{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        áreas de descanso y recreación acuática
+                      </strong>
+                      .
+                    </li>
+                    <li>
+                      <strong>🏃 Atletismo:</strong>{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        Mejoramiento de la pista atlética
+                      </strong>{" "}
+                      con superficie de tartán y áreas especializadas para{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        disciplinas de carreras, saltos y lanzamientos
+                      </strong>
+                      .
+                    </li>
+                    <li>
+                      <strong>🏋️ Gimnasio y Sauna:</strong> Renovación completa
+                      de equipos,{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        ampliación de áreas
+                      </strong>{" "}
+                      y nueva zona wellness con servicios de recuperación
+                      física.
+                    </li>
+                    <li>
+                      <strong>💃 Zona de Baile:</strong> Mejora del espacio,{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        nueva pista de baile, techo renovado
+                      </strong>{" "}
+                      y ambiente adaptado para clases y eventos sociales.
+                    </li>
+                  </ul>
+                  <div className="phase-result">
+                    <strong>✅ Resultado:</strong> Un club con instalaciones
+                    deportivas renovadas, funcionales y sostenibles, diseñadas
+                    para el bienestar y la convivencia de todos los socios.
+                  </div>
+                  <div className="progress-bar">
+                    <div className="progress-fill"></div>
+                  </div>
+                </div>
               </div>
-            </div>
+              {/* FASE 3 */}
+              <div className="phase-card" onClick={() => togglePhase(3)}>
+                <div className="phase-header">
+                  <div className="phase-number">3</div>
+                  <div className="phase-title">
+                    <h3>Inclusión y Servicios Sociales</h3>
+                    <p>Un club para toda la familia</p>
+                  </div>
+                  <div className="phase-meta">
+                    <div className="phase-duration">19 - 24 meses</div>
+                    <div className="expand-icon" id="icon-3">
+                      ▼
+                    </div>
+                  </div>
+                </div>
+                <div className="phase-content" id="content-3">
+                  <ul>
+                    <li>
+                      👵 <strong>Centro integral para adultos mayores:</strong>{" "}
+                      Espacio con atención médica básica, actividades
+                      recreativas y programas de bienestar físico y emocional.
+                    </li>
 
-            <div className="phase-card" onClick={() => togglePhase(4)}>
-              <div className="phase-header">
-                <div className="phase-number">4</div>
-                <div className="phase-title">
-                  <h3>Modernización y Expansión</h3>
-                  <p>Tecnología y sostenibilidad</p>
-                </div>
-                <div className="phase-duration">Meses 31-36</div>
-                <div className="expand-icon" id="icon-4">
-                  ▼
-                </div>
-              </div>
-              <div className="phase-content" id="content-4">
-                <ul>
-                  <li>
-                    <strong>Tecnología:</strong> Acceso biométrico y cajeros
-                    automáticos
-                  </li>
-                  <li>
-                    <strong>Nuevos ingresos:</strong> Coworking, bar exclusivo,
-                    biohuertos
-                  </li>
-                  <li>
-                    <strong>Zona de mascotas:</strong> Espacios mejorados para
-                    recreación
-                  </li>
-                  <li>
-                    <strong>Energía renovable:</strong> Paneles solares y bombas
-                    eficientes
-                  </li>
-                  <li>
-                    <strong>Autosostenibilidad:</strong> Reducción de costos
-                    energéticos
-                  </li>
-                </ul>
-                <p>
-                  <strong>Resultado:</strong> Club moderno, tecnológico y
-                  ambientalmente responsable.
-                </p>
-              </div>
-            </div>
+                    <li>
+                      ♿ <strong>Accesibilidad universal:</strong>{" "}
+                      Implementación de rampas, señalética táctil en braille y
+                      vestuarios adaptados en todas las zonas del club.
+                    </li>
 
-            <div className="phase-card" onClick={() => togglePhase(5)}>
-              <div className="phase-header">
-                <div className="phase-number">5</div>
-                <div className="phase-title">
-                  <h3>Proyectos de Largo Plazo</h3>
-                  <p>Cultura y deporte de élite</p>
-                </div>
-                <div className="phase-duration">Desarrollo continuo</div>
-                <div className="expand-icon" id="icon-5">
-                  ▼
+                    <li>
+                      🩺 <strong>Salud y bienestar:</strong> Servicio de terapia
+                      física, equipamiento médico esencial y campañas
+                      preventivas continuas para socios y familiares.
+                    </li>
+
+                    <li>
+                      👨‍👩‍👧 <strong>Espacios familiares renovados:</strong>{" "}
+                      Remodelación del área infantil,{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        implementación de una guardería segura y moderna 👶
+                      </strong>
+                      , y renovación del castillo de eventos con prioridad en
+                      seguridad y confort.
+                    </li>
+
+                    <li>
+                      🔥 <strong>Nuevas zonas recreativas:</strong> Ampliación
+                      de las áreas de parrillas junto a las zonas deportivas y
+                      creación de un{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        espacio de camping familiar ⛺
+                      </strong>{" "}
+                      para convivencia al aire libre.
+                    </li>
+
+                    <li>
+                      🤝 <strong>Alianzas estratégicas:</strong> Acuerdos con
+                      aseguradoras para brindar{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        cobertura contra accidentes
+                      </strong>{" "}
+                      y respaldo en programas de salud preventiva.
+                    </li>
+
+                    <li>
+                      🏛️ <strong>Cooperación institucional:</strong> Convenios
+                      con municipalidades para reforzar la{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        seguridad perimetral y vial 🚸
+                      </strong>{" "}
+                      en los accesos al club.
+                    </li>
+                  </ul>
+                  <div className="phase-result">
+                    <strong>✅ Resultado:</strong> Un club inclusivo, saludable
+                    y orientado a la familia, con servicios que promueven el
+                    bienestar integral y la tranquilidad de todos los socios.
+                  </div>
+                  <div className="progress-bar">
+                    <div className="progress-fill"></div>
+                  </div>
                 </div>
               </div>
-              <div className="phase-content" id="content-5">
-                <ul>
-                  <li>
-                    <strong>Infraestructura cultural:</strong> Salones y capilla
-                    renovados
-                  </li>
-                  <li>
-                    <strong>Deporte de alto nivel:</strong> Canchas de pádel y
-                    gimnasio de élite
-                  </li>
-                  <li>
-                    <strong>Transporte inteligente:</strong> Alquiler vs. compra
-                    de vehículos
-                  </li>
-                  <li>
-                    <strong>Eventos corporativos:</strong> Franquicias
-                    autorizadas
-                  </li>
-                  <li>
-                    <strong>Capacitación:</strong> Personal profesional y
-                    actualizado
-                  </li>
-                </ul>
-                <p>
-                  <strong>Resultado:</strong> Club integral con servicios
-                  premium y diversificación de ingresos.
-                </p>
+              {/* FASE 4 */}
+              <div className="phase-card" onClick={() => togglePhase(4)}>
+                <div className="phase-header">
+                  <div className="phase-number">4</div>
+                  <div className="phase-title">
+                    <h3>Modernización y Sostenibilidad</h3>
+                    <p>Tecnología y sostenibilidad para todos los socios.</p>
+                  </div>
+                  <div className="phase-meta">
+                    <div className="phase-duration">Desarrollo continuo</div>
+                    <div className="expand-icon" id="icon-4">
+                      ▼
+                    </div>
+                  </div>
+                </div>
+                <div className="phase-content" id="content-4">
+                  <ul>
+                    <li>
+                      🏗️ <strong>Nuevos espacios:</strong> Salón multiuso y zona
+                      coworking para actividades deportivas, culturales y
+                      profesionales.
+                    </li>
+                    <li>
+                      💼 <strong>Ingresos sostenibles:</strong> Alianzas
+                      estratégicas, membresías para no socios, bar exclusivo y
+                      concesionarios optimizados.
+                    </li>
+                    <li>
+                      💡 <strong>Tecnología inteligente:</strong> Acceso
+                      biométrico, control digital de ingresos y cajeros
+                      automáticos.
+                    </li>
+                    <li>
+                      🌐 <strong>Transformación digital:</strong> Implementación
+                      de una{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        plataforma online
+                      </strong>{" "}
+                      para reservas, pagos, reportes y votaciones, junto con una
+                      app móvil para comunicación directa con los socios.
+                    </li>
+                    <li>
+                      🔒 <strong>Seguridad integral:</strong> Cámaras de
+                      videovigilancia 24/7, centro de monitoreo activo y{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        mayor presencia de personal de seguridad
+                      </strong>{" "}
+                      en áreas deportivas y recreativas.
+                    </li>
+                    <li>
+                      🌿 <strong>Recreación verde:</strong> Biohuertos
+                      familiares, jardines sostenibles y zona de mascotas
+                      renovada.
+                    </li>
+                    <li>
+                      🔋 <strong>Energías renovables:</strong> Instalación de
+                      sistema híbrido de{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        paneles solares y microturbinas eólicas
+                      </strong>{" "}
+                      para alimentar iluminación, piscina temperada y zonas
+                      comunes.
+                    </li>
+                    <li>
+                      🔄 <strong>Autosostenibilidad:</strong> Reducción de
+                      costos energéticos mediante eficiencia, reciclaje y
+                      gestión ambiental responsable.
+                    </li>
+                    <li>
+                      🤝 <strong>Comunidad y familia:</strong> Actividades
+                      inclusivas, accesibilidad universal y áreas infantiles
+                      seguras que fortalecen la unión familiar.
+                    </li>
+                    <li>
+                      🚗{" "}
+                      <strong>
+                        Mejoramiento de playas de estacionamiento:
+                      </strong>{" "}
+                      Reordenamiento de espacios, pavimentación y señalización
+                      moderna para un acceso más fluido y seguro.
+                    </li>
+                  </ul>
+                  <div className="phase-result">
+                    <strong>✅ Resultado:</strong> Un club moderno, seguro y
+                    sostenible, que combina tecnología, energías limpias y
+                    bienestar para todos los socios.
+                  </div>
+                  <div className="progress-bar">
+                    <div className="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+              {/* FASE 5 */}
+              <div className="phase-card" onClick={() => togglePhase(5)}>
+                <div className="phase-header">
+                  <div className="phase-number">5</div>
+                  <div className="phase-title">
+                    <h3>Proyectos de Largo Plazo</h3>
+                    <p>Cultura, deporte y sostenibilidad de élite</p>
+                  </div>
+                  <div className="phase-meta">
+                    <div className="phase-duration">Desarrollo continuo</div>
+                    <div className="expand-icon" id="icon-5">
+                      ▼
+                    </div>
+                  </div>
+                </div>
+                <div className="phase-content" id="content-5">
+                  <ul>
+                    <li>
+                      🎭 <strong>Infraestructura cultural:</strong> Renovación
+                      de{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        salones y capilla
+                      </strong>{" "}
+                      para eventos artísticos, sociales y culturales.
+                    </li>
+
+                    <li>
+                      🎾 <strong>Deporte de alto rendimiento:</strong> Nuevas{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        canchas de pádel
+                      </strong>{" "}
+                      y ampliación del{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        gimnasio de élite
+                      </strong>{" "}
+                      con equipamiento profesional.
+                    </li>
+
+                    <li>
+                      🚐 <strong>Movilidad inteligente:</strong> Sistema interno
+                      de transporte con{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        vehículos eléctricos o híbridos
+                      </strong>{" "}
+                      bajo modalidad de alquiler para reducir costos.
+                    </li>
+
+                    <li>
+                      🏢 <strong>Eventos y franquicias:</strong> Creación de un{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        centro de convenciones
+                      </strong>{" "}
+                      y alianzas con{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        franquicias autorizadas
+                      </strong>{" "}
+                      (cafetería, farmacia, óptica, banco).
+                    </li>
+
+                    <li>
+                      🎓 <strong>Capacitación continua:</strong> Formación
+                      permanente del personal en{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        servicio, mantenimiento, seguridad y gestión deportiva
+                      </strong>{" "}
+                      mediante convenios educativos.
+                    </li>
+
+                    <li>
+                      🌿 <strong>Compromiso sostenible:</strong> Implementación
+                      de{" "}
+                      <strong style={{ color: "#5b5757db" }}>
+                        paneles solares, reciclaje y jardinería ecológica
+                      </strong>{" "}
+                      en todas las nuevas construcciones.
+                    </li>
+                  </ul>
+                  <div className="phase-result">
+                    <strong>✅ Resultado:</strong> Un Club Cultural Lima
+                    integral, moderno y autosostenible que combina cultura,
+                    deporte, educación y tecnología al servicio de sus socios.
+                  </div>
+                  <div className="progress-bar">
+                    <div className="progress-fill"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
